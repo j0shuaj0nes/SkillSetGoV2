@@ -1,0 +1,57 @@
+[
+  {
+    "username": "john_doe",
+    "givenName": "John",
+    "familyName": "Doe",
+    "email": "john@example.com",
+    "password": "password123",
+    "country": "United States",
+    "skillsOffering": ["SQL", "Verbal Communication"],
+    "skillsInterestedIn": ["Tax", "Financial Planning"]
+  },
+
+  {
+    "username": "jane_smith",
+    "givenName": "Jane",
+    "familyName": "Smith",
+    "email": "jane@example.com",
+    "password": "abc123",
+    "country": "Canada",
+    "skillsOffering": ["Portfolio Diversification"],
+    "skillsInterestedIn": ["Active Listening", "Financial Literacy"]
+  },
+
+  {
+    "username": "josh_jones",
+    "givenName": "Josh",
+    "familyName": "Jones",
+    "email": "josh@example.com",
+    "password": "abcde1234",
+    "country": "Australia",
+    "skillsOffering": ["Full Stacker Developer", "Verbal Communication"],
+    "skillsInterestedIn": ["Asset Allocation"]
+  },
+
+  {
+    "username": "dr_phil",
+    "givenName": "Anu",
+    "familyName": "Adeniyi",
+    "email": "anuh@example.com",
+    "password": "password999",
+    "country": "Australia",
+    "skillsOffering": ["Full Stacker Developer", "Presentation Skills"],
+    "skillsInterestedIn": ["Tax"]
+  },
+
+  {
+    "username": "dt",
+    "givenName": "Diana",
+    "familyName": "Tran",
+    "email": "dtran44@example.com",
+    "password": "hello123",
+    "country": "Australia",
+    "skillsOffering": ["Full Stacker Developer", "Tax"],
+    "skillsInterestedIn": ["Debugging"]
+  }
+
+]
