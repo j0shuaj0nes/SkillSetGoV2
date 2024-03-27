@@ -3,7 +3,7 @@ import GoogleSignin from "../../assets/btn_google_signin_dark_pressed_web.png";
 import { auth } from "../../utils/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { AppShell, Title, Center, Stack, Button} from '@mantine/core';
-import {GoogleHeader} from '../../components/Header/GoogleHeader';
+// import {GoogleHeader} from '../../components/Header/GoogleHeader';
 
 const WelcomeChat = () => {
 
@@ -19,7 +19,7 @@ const WelcomeChat = () => {
       padding="md"
       >
       <AppShell.Header>
-      <GoogleHeader />
+      {/* <GoogleHeader /> */}
       </AppShell.Header>
 
       <AppShell.Main>
