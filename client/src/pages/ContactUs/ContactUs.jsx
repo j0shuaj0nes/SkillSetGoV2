@@ -1,4 +1,5 @@
 import {
+  AppShell, 
   Text,
   Title,
   SimpleGrid,
@@ -11,6 +12,7 @@ import {
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
 import { ContactIconsList } from './ContactIcons';
 import classes from './ContactUs.module.css';
+import Header from '../../components/Header';
 
 const social = [IconBrandTwitter, IconBrandYoutube, IconBrandInstagram];
 
@@ -22,6 +24,15 @@ export function ContactUs() {
   ));
 
   return (
+    <AppShell
+    header={{ height: 60 }}
+    padding="md">
+
+    <AppShell.Header>
+    <Header />
+    </AppShell.Header>
+
+    <AppShell.Main>
     <div className={classes.wrapper}>
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={50}>
         <div>
@@ -50,7 +61,7 @@ export function ContactUs() {
           <Textarea
             required
             label="Your message"
-            placeholder="I want to order your goods"
+            placeholder="I like SkillSetGo!"
             minRows={4}
             mt="md"
             classNames={{ input: classes.input, label: classes.inputLabel }}
@@ -62,5 +73,7 @@ export function ContactUs() {
         </div>
       </SimpleGrid>
     </div>
+    </AppShell.Main>
+    </AppShell>
   );
 }
