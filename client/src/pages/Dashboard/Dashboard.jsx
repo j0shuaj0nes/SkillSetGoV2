@@ -15,16 +15,57 @@ import {
 } from "@mantine/core";
 import classes from "./Dashboard.module.css";
 import Header from "../../components/Header";
-import CaneraRecording from "../../assets/CameraRecording.jpg";
+import CameraRecording from "../../assets/CameraRecording.jpg";
+import Collaboration from "../../assets/Collaboration.jpg";
+import Library from "../../assets/Library.jpg";
+import Mentorship from "../../assets/Mentorship.jpg";
+import PortfolioCreation from "../../assets/PortfolioCreation.jpg";
+import Questions from "../../assets/Questions.jpg";
 
 const cardContents = [
   {
-    img: CaneraRecording,
-    imgAlt: 'Camera recording image by vectorjuice on Freepik',
+    img: CameraRecording,
+    imgAlt: "Camera recording image by vectorjuice on Freepik",
     title: "Create a 'How-To-Series'",
-    desc: "Create an instructional video to show off your expertise and create a following."
+    desc: "Create an instructional video to show off your expertise and create a following.",
+    button: "Create",
   },
-]
+  {
+    img: PortfolioCreation,
+    imgAlt: "Create a portfolio image by vectorjuice on Freepik",
+    title: "Portfolio Building",
+    desc: "Build your professional portfolio to showcase your skills and projects to potential clients and employers.",
+    button: "Build",
+  },
+  {
+    img: Collaboration,
+    imgAlt: "Collaboration image by stockgiu on Freepik",
+    title: "Collaborate",
+    desc: "Collaborate with your fellow SkillSetGoers on interesting projects.",
+    button: "Collaborate",
+  },
+  {
+    img: Mentorship,
+    imgAlt: "Mentor image by jcomp on Freepik",
+    title: "Mentorship",
+    desc: "Find mentors or offer mentorship to those looking to learn from your expertise.",
+    button: "Find",
+  },
+  {
+    img: Library,
+    imgAlt: "Learning library image by vectorjuice on Freepik",
+    title: "Learning Library",
+    desc: "Browse through SkillSetGo's comprehensive library for tutorials, resources and workshops to up-skill yourself.",
+    button: "Browse",
+  },
+  {
+    img: Questions,
+    imgAlt: "Question image by vectorjuice on Freepik",
+    title: "Q&A and Discussions",
+    desc: "Participate in discussions, ask questions and seek advice from experts or the community.",
+    button: "Participate",
+  },
+];
 
 export function Dashboard() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
@@ -51,6 +92,7 @@ export function Dashboard() {
       }}
       padding="md"
     >
+      <Center inline>
       <AppShell.Header bg="var(--mantine-color-blue-light)">
         <Header />
         <Group h="100%" px="md">
@@ -68,6 +110,8 @@ export function Dashboard() {
           />
         </Group>
       </AppShell.Header>
+      </Center>
+
 
       <AppShell.Navbar p="md">
         <NavbarSimple />
@@ -84,18 +128,13 @@ export function Dashboard() {
           </Stack>
         </Center>
 
-        {/*Create a video card*/}
+        {/* Content Cards */}
         <Grid>
           {cardContents.map((content) => (
-
             <Grid.Col key={content.title} span={4}>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <Card.Section>
-                  <Image
-                    src={content.img}
-                    height={160}
-                    alt={content.imgAlt}
-                  />
+                  <Image src={content.img} height={160} alt={content.imgAlt} />
                 </Card.Section>
 
                 <Group justify="space-between" mt="md" mb="xs">
@@ -114,136 +153,6 @@ export function Dashboard() {
               </Card>
             </Grid.Col>
           ))}
-
-          {/*Portfolio building card*/}
-          <Grid.Col span={4}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
-                <Image
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                  height={160}
-                  alt="Create a portfolio image by vectorjuice on Freepik"
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Portfolio Building</Text>
-              </Group>
-              <Center>
-                <Text size="sm" c="dimmed">
-                  Build your professional portfolio to showcase your skills &
-                  projects to potential clients and employers
-                </Text>
-              </Center>
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Build
-              </Button>
-            </Card>
-          </Grid.Col>
-
-          {/*Collaboration card*/}
-          <Grid.Col span={4}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
-                <Image
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                  height={160}
-                  alt="Collaboration image by stockgiu on Freepik"
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Collaborate & Projects</Text>
-              </Group>
-              <Center>
-                <Text size="sm" c="dimmed">
-                  Collaborate with your fellow SkillSetGoers on interesting
-                  projects.
-                </Text>
-              </Center>
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Collaborate
-              </Button>
-            </Card>
-          </Grid.Col>
-
-          {/*Mentorship card*/}
-          <Grid.Col span={4}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
-                <Image
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                  height={160}
-                  alt="Mentor image by jcomp on Freepik"
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Mentorship</Text>
-              </Group>
-              <Center>
-                <Text size="sm" c="dimmed">
-                  Find mentors or offer mentorship to those looking to learn
-                  from your expertise.
-                </Text>
-              </Center>
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Find
-              </Button>
-            </Card>
-          </Grid.Col>
-
-          {/*Library card*/}
-          <Grid.Col span={4}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
-                <Image
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                  height={160}
-                  alt="Learning library image by vectorjuice on Freepik"
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Learning Library</Text>
-              </Group>
-
-              <Text size="sm" c="dimmed">
-                Browse through SkillSetGo's comprehensive library for tutorials,
-                resources and workshops to up-skill yourself.
-              </Text>
-
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Browse
-              </Button>
-            </Card>
-          </Grid.Col>
-
-          {/*Q&A card*/}
-          <Grid.Col span={4}>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <Card.Section>
-                <Image
-                  src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-                  height={160}
-                  alt="Learning library image by vectorjuice on Freepik"
-                />
-              </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
-                <Text fw={500}>Q&A and Discussions</Text>
-              </Group>
-
-              <Text size="sm" c="dimmed">
-                Participate in discussions, ask questions and seek advice from
-                experts or the community.
-              </Text>
-
-              <Button color="blue" fullWidth mt="md" radius="md">
-                Participate
-              </Button>
-            </Card>
-          </Grid.Col>
         </Grid>
       </AppShell.Main>
     </AppShell>

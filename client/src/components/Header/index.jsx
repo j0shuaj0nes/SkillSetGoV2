@@ -6,8 +6,8 @@ import {
   Burger,
   Group,
   Anchor,
-  MantineProvider,
   createTheme,
+  Center,
 } from "@mantine/core";
 import Auth from "../../utils/auth";
 import classes from "./header.css";
@@ -32,9 +32,9 @@ const Header = () => {
     <div className={classes.header}>
       <Container
         size="responsive"
-        
         className={classes.inner}
       >
+        
         <Group justify="space-between">
           <Title className={classes.title}>SkillSetGo</Title>
           <div>
@@ -66,7 +66,7 @@ const Header = () => {
             )}
           </div>
         </Group>
-   
+  
         {/* <Group h="100%" px="md">
           <Burger opened={mobileOpened} onClick={toggleMobile} hiddenFrom="sm" size="sm" />
           <Burger opened={desktopOpened} onClick={toggleDesktop} visibleFrom="sm" size="sm" />
