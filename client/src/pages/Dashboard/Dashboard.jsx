@@ -1,17 +1,17 @@
 import { useDisclosure } from "@mantine/hooks";
-import { NavbarSimple } from "../Dashboard/NavbarSimple";
+import { NavbarSimple } from "../../components/Layout/NavbarSimple";
 import {
   AppShell,
   Burger,
-  Group,
-  Center,
-  Title,
-  Grid,
+  Button,
   Card,
+  Center,
+  Grid,
+  Group,
   Image,
   Text,
+  Title,
   Stack,
-  Button,
 } from "@mantine/core";
 import classes from "./Dashboard.module.css";
 import Header from "../../components/Header";
@@ -70,18 +70,7 @@ const cardContents = [
 export function Dashboard() {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-  const WelcomeMessage = (props) => {
-    const { isLoggedIn, user } = props;
-    return (
-      <div>
-        {isLoggedIn ? (
-          <h2>Welcome back, {user}!</h2>
-        ) : (
-          <p>Please log in to continue </p>
-        )}
-      </div>
-    );
-  };
+
   return (
     <AppShell
       header={{ height: 60 }}
@@ -122,7 +111,6 @@ export function Dashboard() {
           <Stack h={100}>
             <Title className={classes.title}>
               Welcome
-              {/* <WelcomeMessage user={user} isLoggedIn = {isLoggedIn}/> */}
             </Title>
             <Text className={classes.title}> SkillSetGo Resources</Text>
           </Stack>
@@ -148,7 +136,7 @@ export function Dashboard() {
                 </Center>
 
                 <Button color="blue" fullWidth mt="md" radius="md">
-                  Create
+                {content.button}
                 </Button>
               </Card>
             </Grid.Col>
