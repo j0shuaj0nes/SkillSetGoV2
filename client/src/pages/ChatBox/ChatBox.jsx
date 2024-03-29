@@ -9,7 +9,6 @@ import {
 import { db } from "../../utils/firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
-import { AppShell, Title, Center, Stack, Button} from '@mantine/core';
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -36,16 +35,8 @@ const ChatBox = () => {
   }, []);
 
   return (
-    <AppShell
-      header={{ height: 60 }}
-      padding="md"
-      >
-      <AppShell.Header>
-      {/* <GoogleHeader /> */}
-      </AppShell.Header>
-
-      <AppShell.Main>
-    {/* <main className="chat-box"> */}
+   
+  <main>
       <div className="messages-wrapper">
         {messages?.map((message) => (
           <Message key={message.id} message={message} />
@@ -54,9 +45,8 @@ const ChatBox = () => {
       {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
       <span ref={scroll}></span>
       <SendMessage scroll={scroll} />
-    {/* </main> */}
-    </AppShell.Main>
-    </AppShell>
+      </main>
+   
   );
 };
 

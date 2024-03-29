@@ -1,8 +1,4 @@
-import { useDisclosure } from "@mantine/hooks";
-import { NavbarSimple } from "../../components/Layout/NavbarSimple";
 import {
-  AppShell,
-  Burger,
   Button,
   Card,
   Center,
@@ -14,7 +10,6 @@ import {
   Stack,
 } from "@mantine/core";
 import classes from "./Dashboard.module.css";
-import Header from "../../components/Header";
 import CameraRecording from "../../assets/CameraRecording.jpg";
 import Collaboration from "../../assets/Collaboration.jpg";
 import Library from "../../assets/Library.jpg";
@@ -68,81 +63,41 @@ const cardContents = [
 ];
 
 export function Dashboard() {
-  const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
-
   return (
-    <AppShell
-      header={{ height: 60 }}
-      navbar={{
-        width: 300,
-        breakpoint: "sm",
-        collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
-      }}
-      padding="md"
-    >
-      <Center inline>
-      <AppShell.Header bg="var(--mantine-color-blue-light)">
-        <Header />
-        <Group h="100%" px="md">
-          <Burger
-            opened={mobileOpened}
-            onClick={toggleMobile}
-            hiddenFrom="sm"
-            size="sm"
-          />
-          <Burger
-            opened={desktopOpened}
-            onClick={toggleDesktop}
-            visibleFrom="sm"
-            size="sm"
-          />
-        </Group>
-      </AppShell.Header>
+    <div>
+      <Center>
+        <Stack h={100}>
+          <Title className={classes.title}>Welcome</Title>
+          <Title order={2}> SkillSetGo Dashboard</Title>
+        </Stack>
       </Center>
 
+      {/* Content Cards */}
+      <Grid>
+        {cardContents.map((content) => (
+          <Grid.Col key={content.title} span={4}>
+            <Card shadow="sm" padding="lg" radius="md" withBorder>
+              <Card.Section>
+                <Image src={content.img} height={160} alt={content.imgAlt} />
+              </Card.Section>
 
-      <AppShell.Navbar p="md">
-        <NavbarSimple />
-      </AppShell.Navbar>
+              <Group justify="space-between" mt="md" mb="xs">
+                <Text fw={500}>{content.title}</Text>
+              </Group>
 
-      <AppShell.Main>
-        <Center>
-          <Stack h={100}>
-            <Title className={classes.title}>
-              Welcome
-            </Title>
-            <Text className={classes.title}> SkillSetGo Resources</Text>
-          </Stack>
-        </Center>
+              <Center>
+                <Text size="sm" c="dimmed">
+                  {content.desc}
+                </Text>
+              </Center>
 
-        {/* Content Cards */}
-        <Grid>
-          {cardContents.map((content) => (
-            <Grid.Col key={content.title} span={4}>
-              <Card shadow="sm" padding="lg" radius="md" withBorder>
-                <Card.Section>
-                  <Image src={content.img} height={160} alt={content.imgAlt} />
-                </Card.Section>
-
-                <Group justify="space-between" mt="md" mb="xs">
-                  <Text fw={500}>{content.title}</Text>
-                </Group>
-
-                <Center>
-                  <Text size="sm" c="dimmed">
-                    {content.desc}
-                  </Text>
-                </Center>
-
-                <Button color="blue" fullWidth mt="md" radius="md">
+              <Button color="blue" fullWidth mt="md" radius="md">
                 {content.button}
-                </Button>
-              </Card>
-            </Grid.Col>
-          ))}
-        </Grid>
-      </AppShell.Main>
-    </AppShell>
+              </Button>
+            </Card>
+          </Grid.Col>
+        ))}
+      </Grid>
+    </div>
   );
 }

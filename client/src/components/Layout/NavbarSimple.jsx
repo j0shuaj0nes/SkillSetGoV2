@@ -1,59 +1,50 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   IconFriends,
   IconLogout,
   IconMailbox,
-  IconMessageChatbot, 
+  IconMessageChatbot,
   IconUserCircle,
   IconUsersGroup,
-} from '@tabler/icons-react';
-
-import classes from './NavbarSimple.module.css';
+} from "@tabler/icons-react";
+import { Box, NavLink, Burger } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 
 const data = [
-  { link: '/profile', label: 'Profile', icon: IconUserCircle },
-  { link: '/groups', label: 'Groups', icon: IconUsersGroup },
-  { link: '/following', label: 'Following', icon: IconFriends},
-  { link: '/chatbox', label: 'Chatbox', icon: IconMessageChatbot },
+  { href: "/profile", label: "Profile", icon: IconUserCircle },
+  { href: "/groups", label: "Groups", icon: IconUsersGroup },
+  { href: "/following", label: "Following", icon: IconFriends },
+  { href: "/chatbox", label: "Chatbox", icon: IconMessageChatbot },
+  { href: "/contact-us", label: "Contact us", icon: IconMailbox },
+  { href: "/logout", label: "Logout", icon: IconLogout },
 ];
 
 export function NavbarSimple() {
-  const [active, setActive] = useState();
+  const [opened, { toggle }] = useDisclosure(false);
+  const [active, setActive] = useState(0);
 
-  const links = data.map((item) => (
-    <a
-      className={classes.link}
-      data-active={item.label === active || undefined}
-      href={item.link}
+  const items = data.map((item, index) => (
+    <NavLink
+      href={item.href}
       key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
-      }}
-    >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label}</span>
-    </a>
+      active={index === active}
+      label={item.label}
+      description={item.description}
+      rightSection={item.rightSection}
+      leftSection={<item.icon size="1rem" stroke={1.5} />}
+      onClick={() => setActive(index)}
+    />
   ));
 
   return (
-    <nav className={classes.navbar}>
-      <div className={classes.navbarMain}>
-        
-        {links}
-      </div>
-
-      <div className={classes.footer}>
-        <a href="/contact-us" className={classes.link} onClick={(event) => event.preventDefault()}>
-          <IconMailbox className={classes.linkIcon} stroke={1.5} />
-          <span>Contact Us</span>
-        </a>
-
-        <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
-          <IconLogout className={classes.linkIcon} stroke={1.5} />
-          <span>Logout</span>
-        </a>
-      </div>
-    </nav>
+    <Box w={200}>
+      <Burger
+        opened={opened}
+        onClick={toggle}
+        size="sm"
+        aria-label="Toggle navigation"
+      />
+      {items}
+    </Box>
   );
 }
