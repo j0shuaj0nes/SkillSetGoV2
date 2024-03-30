@@ -53,7 +53,7 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button me={2} variant="filled">
+                {/* <Button me={2} variant="filled">
                   <Anchor c="white" component={Link} to="/login">
                     Login
                   </Anchor>
@@ -62,7 +62,7 @@ const Header = () => {
                   <Anchor c="white" component={Link} to="/signup">
                     Signup
                   </Anchor>
-                </Button>
+                </Button> */}
               </>
             )}
           

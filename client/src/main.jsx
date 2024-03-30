@@ -11,6 +11,10 @@ import Chatbox from './pages/ChatBox/ChatBox.jsx';
 import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
 import { Signup } from './pages/Signup/Signup.jsx';
 import { LogOut } from './pages/Logout/Logout.jsx';
+import { GroupsJoined } from './pages/GroupsJoined/GroupsJoined.jsx';
+import { UserFollowing } from './pages/UserFollowing/UserFollowing.jsx';
+import ProfileLogin from './pages/ProfileLogin/ProfileLogin.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -23,7 +27,6 @@ const router = createBrowserRouter([
         index: true,
         element: <LandingPage />
       }, 
-      
       {
         path: '/signup',
         element: <Signup />
@@ -49,7 +52,18 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard />
       },
-    
+      {
+        path: '/groups-joined',
+        element: <GroupsJoined />
+      },
+      {
+        path: '/user-following',
+        element: <UserFollowing />
+      },
+      {
+        path: '/profile-login',
+        element: <ProfileLogin/>
+      },
     ]
   }
 ])

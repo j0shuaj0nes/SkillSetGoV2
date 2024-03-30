@@ -3,10 +3,11 @@ import { NavbarSimple } from "../../components/Layout/NavbarSimple";
 import { useDisclosure } from "@mantine/hooks";
 import { AppShell, Burger, Group } from "@mantine/core";
 
-export default function AppLayout({ loggedIn, setLoggedIn }) {
+export default function AppLayout({loggedIn, setLoggedIn}) {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure();
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   console.log('Welcome -> loggedIn', loggedIn);
+
 
   return (
     // Conditional (ternary) operator is checking to see if loggedIn is true. If so render the following:

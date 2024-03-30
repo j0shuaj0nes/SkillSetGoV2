@@ -12,8 +12,8 @@ import { useDisclosure } from "@mantine/hooks";
 
 const data = [
   { href: "/profile", label: "Profile", icon: IconUserCircle },
-  { href: "/groups", label: "Groups", icon: IconUsersGroup },
-  { href: "/following", label: "Following", icon: IconFriends },
+  { href: "/groups-joined", label: "Groups", icon: IconUsersGroup },
+  { href: "/user-following", label: "Following", icon: IconFriends },
   { href: "/chatbox", label: "Chatbox", icon: IconMessageChatbot },
   { href: "/contact-us", label: "Contact us", icon: IconMailbox },
   { href: "/logout", label: "Logout", icon: IconLogout },
