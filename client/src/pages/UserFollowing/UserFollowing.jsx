@@ -7,19 +7,13 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
     username: 'robbie',
-    givenName: 'Robbie',
-    familyName: 'Wolf',
     group: 'Coding',
-    email: 'rob_wolf@gmail.com',
   },
   {
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png',
     username: 'jj',
-    givenName: 'Jill',
-    familyName: 'Breaker',
     group: 'Communication',
-    email: 'jj@breaker.com',
   }
 ];
 
@@ -34,12 +28,6 @@ export function UserFollowing() {
             {item.username}
           </Text>
         </Group>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.givenName}</Text>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.familyName}</Text>
       </Table.Td>
       <Table.Td>
         <Text fz="sm">{item.group}</Text>
@@ -70,10 +58,7 @@ export function UserFollowing() {
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Username</Table.Th>
-            <Table.Th>Given name</Table.Th>
-            <Table.Th>Family name</Table.Th>
             <Table.Th>Group</Table.Th>
-            <Table.Th>Email</Table.Th>
             <Table.Th>Action</Table.Th>
             <Table.Th />
           </Table.Tr>
