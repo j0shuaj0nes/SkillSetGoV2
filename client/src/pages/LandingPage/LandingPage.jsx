@@ -14,7 +14,7 @@ export function LandingPage() {
 
         <Container size={640}>
           <Text size="lg" className={classes.description}>
-            SkillSetGo connects you with a global community of Professionals eager to trade a skill.
+            SkillSetGo connects you with a global community of professionals eager to trade a skill.
             Simply create a profile showcasing your talents, browse through a diverse range of skills offered by others, and connect instantly.
 
             Join Skills-book today and let's start sharing, learning, and growing together!

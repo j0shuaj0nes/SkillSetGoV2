@@ -1,25 +1,13 @@
 import React from "react";
 import { auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Avatar, Text, AppShell, Group, Container } from '@mantine/core';
-import { NavbarSimple } from '../Dashboard/NavbarSimple';
-import GoogleHeader from '../../components/Header';
+import { Avatar, Text, Group, Container } from '@mantine/core';
+
 
 const Message = ({ message }) => {
   const [user] = useAuthState(auth);
   return (
-    <AppShell
-    header={{ height: 60 }}
-    padding="md"
-    >
-      <AppShell.Header>
-      <GoogleHeader/>
-      </AppShell.Header>
-
-      {/* <AppShell.Navbar p="md">
-      <NavbarSimple />
-      </AppShell.Navbar> */}
-
+   
         <Container>
       <Group className={`chat-bubble ${message.uid === user.uid ? "right" : ""}`}>
       <Avatar
@@ -33,8 +21,6 @@ const Message = ({ message }) => {
         </div>
       </Group>
       </Container>
-
-</AppShell>
   );
 };
 

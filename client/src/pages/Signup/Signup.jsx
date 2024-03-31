@@ -8,9 +8,9 @@ import {
     Text,
     Anchor,
   } from '@mantine/core';
-  import classes from './Register.module.css';
+  import classes from './Signup.module.css';
   import {Link} from 'react-router-dom'
-  export function Register() {
+  export function Signup() {
     return (
       <div className={classes.wrapper}>
         <Paper className={classes.form} radius={0} p={30}>
@@ -22,7 +22,7 @@ import {
           <PasswordInput label="Password" placeholder="Your password" mt="md" size="md" />
           <Checkbox label="Keep me logged in" mt="xl" size="md" />
           <Button fullWidth mt="xl" size="md">
-            Register
+            Sign-up
           </Button>
           <Text ta="center" mt="md">
             Already have an account? {' '}
