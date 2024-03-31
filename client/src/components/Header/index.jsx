@@ -3,14 +3,14 @@ import {
   Container,
   Button,
   Title,
-  Burger,
+  // Burger,
   Group,
   Anchor,
-  MantineProvider,
+  // MantineProvider,
   createTheme,
 } from "@mantine/core";
 import Auth from "../../utils/auth";
-import classes from "./header.css";
+import "./header.css";
 
 const Header = () => {
   const logout = (event) => {

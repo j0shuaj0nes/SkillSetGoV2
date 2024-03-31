@@ -4,9 +4,6 @@ import './index.css'
 
 import App from './App.jsx'
 import Home from './pages/Home';
-import Signup from './pages/Signup';
-import Login from './pages/Login';
-import Error from './pages/Error';
 import { ContactUs } from './pages/ContactUs/ContactUs.jsx';
 import { LandingPage } from './pages/LandingPage/LandingPage.jsx';
 import { LogIn } from './pages/LogIn/LogIn.jsx';
@@ -15,25 +12,22 @@ import Chatbox from './pages/ChatBox/ChatBox.jsx';
 import WelcomeChat from './pages/ChatBox/WelcomeChat.jsx';
 import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
 import ChatBoxApp from './pages/ChatBox/ChatBoxApp.jsx';
+import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    error: <Error />,
+    error: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <Home />
+        element: <LandingPage />
       }, 
       {
         path: '/contact-us',
         element: <ContactUs />
-      },
-      {
-        path: '/landing-page',
-        element: <LandingPage />
       },
       {
         path: '/login',
@@ -59,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/error-page',
+        element: <ErrorPage />
       },
     
     ]
