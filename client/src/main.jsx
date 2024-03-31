@@ -3,16 +3,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
 import './index.css'
 
 import App from './App.jsx'
-import Home from './pages/Home';
+import Error from './pages/Error';
 import { ContactUs } from './pages/ContactUs/ContactUs.jsx';
 import { LandingPage } from './pages/LandingPage/LandingPage.jsx';
 import { LogIn } from './pages/LogIn/LogIn.jsx';
-import { Register } from './pages/Register/register';
 import Chatbox from './pages/ChatBox/ChatBox.jsx';
-import WelcomeChat from './pages/ChatBox/WelcomeChat.jsx';
 import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
-import ChatBoxApp from './pages/ChatBox/ChatBoxApp.jsx';
-import { ErrorPage } from './pages/ErrorPage/ErrorPage';
+import { Signup } from './pages/Signup/Signup.jsx';
+import { LogOut } from './pages/Logout/Logout.jsx';
+import { GroupsJoined } from './pages/GroupsJoined/GroupsJoined.jsx';
+import { UserFollowing } from './pages/UserFollowing/UserFollowing.jsx';
+import ProfileLogin from './pages/ProfileLogin/ProfileLogin.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -26,6 +28,10 @@ const router = createBrowserRouter([
         element: <LandingPage />
       }, 
       {
+        path: '/signup',
+        element: <Signup />
+      },
+      {
         path: '/contact-us',
         element: <ContactUs />
       },
@@ -34,25 +40,29 @@ const router = createBrowserRouter([
         element: <LogIn />
       },
       {
-        path: '/signup',
-        element: <Register/>
+        path: '/logout',
+        element: <LogOut />
       },
-    
+      
       {
         path: '/chatbox',
         element: <Chatbox />
       },
       {
-        path: '/welcome-chat',
-        element: <WelcomeChat />
-      },
-      {
-        path: '/chatbox-app',
-        element: <ChatBoxApp />
-      },
-      {
         path: '/dashboard',
         element: <Dashboard />
+      },
+      {
+        path: '/groups-joined',
+        element: <GroupsJoined />
+      },
+      {
+        path: '/user-following',
+        element: <UserFollowing />
+      },
+      {
+        path: '/profile-login',
+        element: <ProfileLogin/>
       },
       {
         path: '/error-page',
