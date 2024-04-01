@@ -14,16 +14,22 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import { useState } from "react"
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from '../../utils/queries.js';
+
 
 const Header = () => {
+
+  const { loading, data } = useQuery(QUERY_ME);
+  const user = data?.me || {}; 
+
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
   };
 
-  const user = {
-    name: "Jane Doe",
-    email: "jandoen@fighter.dev",
+  const userdata = {
+    name: loading ? '' : user.username,
     image:
       "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png",
   };
@@ -83,7 +89,7 @@ const Header = () => {
             <Group gap={7}>
               <Avatar src={user.image} alt={user.name} radius="xl" size={20} />
               <Text fw={500} size="sm" lh={1} mr={3}>
-                {user.name}
+                {userdata.name}
               </Text>
               <IconChevronDown
                 style={{ width: rem(12), height: rem(12) }}
