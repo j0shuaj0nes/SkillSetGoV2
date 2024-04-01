@@ -7,10 +7,12 @@ import {
   Title,
   Text,
   Anchor,
+
   MultiSelect
 } from "@mantine/core";
 import classes from "./Signup.module.css";
 import { Link } from "react-router-dom";
+
 
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
@@ -20,6 +22,7 @@ import Auth from "../../utils/auth";
 
 export function Signup() {
   const [formState, setFormState] = useState({
+
     username: "",
     givenname: "",
     familyname: "",
@@ -28,6 +31,7 @@ export function Signup() {
     country: "",
     skillsoffering: "",
     skillsinterestedin: "",
+
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
 
@@ -48,6 +52,7 @@ export function Signup() {
       const { data } = await addUser({
         variables: { ...formState },
       });
+
       console.log(data);
       Auth.login(data.addUser.token);
 
@@ -55,15 +60,18 @@ export function Signup() {
       history.push("/dashboard");
     } catch (e) {
       console.error('Login failed:', e);
+
     }
   };
   return (
     <div className={classes.wrapper}>
+
       {data ? (
         <p>
           Success! You may now head{" "}
           <Anchor component={Link} to="/dashboard">
             to the dashboard.
+
           </Anchor>
         </p>
       ) : (
