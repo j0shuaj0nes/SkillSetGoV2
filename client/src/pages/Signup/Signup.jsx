@@ -24,13 +24,13 @@ export function Signup() {
   const [formState, setFormState] = useState({
 
     username: "",
-    givenname: "",
-    familyname: "",
+    givenName: "",
+    familyName: "",
     email: "",
     password: "",
     country: "",
-    skillsoffering: "",
-    skillsinterestedin: "",
+    skillsOffering: [],
+    skillsInterestedIn: [],
 
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
@@ -57,7 +57,8 @@ export function Signup() {
       Auth.login(data.addUser.token);
 
       // Redirect to dashboard after successful signup
-      history.push("/dashboard");
+      // history.push("/dashboard");
+      window.location.href = '/dashboard';
     } catch (e) {
       console.error('Login failed:', e);
 
@@ -89,18 +90,21 @@ export function Signup() {
             <TextInput
               name="username"
               label="User Name"
+              onChange={handleChange}
               placeholder="Enter your user name"
               classNames={classes}
             />
             <TextInput
-              name="givenname"
+              name="givenName"
               label="Given Name"
+              onChange={handleChange}
               placeholder="Jane"
               classNames={classes}
             />
             <TextInput
-              name="familyname"
+              name="familyName"
               label="Family Name"
+              onChange={handleChange}
               placeholder="Doe"
               classNames={classes}
             />
@@ -122,13 +126,15 @@ export function Signup() {
             <TextInput
               name="country"
               label="Country"
+              onChange={handleChange}
               placeholder="Antarctica"
               classNames={classes}
             />
 
             <MultiSelect
-              name="skillsoffering"
+              name="skillsOffering"
               label="Skills Offering"
+              onChange={handleChange}
               placeholder="Select one or more"
               data={[
                 "SQL",
@@ -154,8 +160,9 @@ export function Signup() {
               ]}
             />
             <MultiSelect
-              name="skillsinterestedin"
+              name="skillsInterestedIn"
               label="Skills Interested In"
+              onChange={handleChange}
               placeholder="Select one or more"
               data={[
                 "SQL",
@@ -181,9 +188,14 @@ export function Signup() {
               ]}
             />
             <Checkbox label="Keep me logged in" mt="xl" size="md" />
-            <Button fullWidth mt="xl" size="md" type="submit">
-              Register
-            </Button>
+            {/* <Anchor component={Link} to="/dashboard"> */}
+              <Button fullWidth mt="xl" size="md" type="submit">
+
+                Register
+
+              </Button>
+            {/* </Anchor> */}
+
             <Text ta="center" mt="md">
               Already have an account?{" "}
               <Anchor component={Link} to="/login" fw={700}>
