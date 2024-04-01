@@ -7,14 +7,13 @@ import { ContactUs } from './pages/ContactUs/ContactUs.jsx';
 import { LandingPage } from './pages/LandingPage/LandingPage.jsx';
 import { LogIn } from './pages/LogIn/LogIn.jsx';
 import Chatbox from './pages/ChatBox/ChatBox.jsx';
-import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
 import { Signup } from './pages/Signup/Signup.jsx';
 import { LogOut } from './pages/Logout/Logout.jsx';
 import { GroupsJoined } from './pages/GroupsJoined/GroupsJoined.jsx';
 import { UserFollowing } from './pages/UserFollowing/UserFollowing.jsx';
 import ProfileLogin from './pages/ProfileLogin/ProfileLogin.jsx';
-import { ErrorPage } from './pages/ErrorPage/ErrorPage';
-
+import { ErrorPage } from './pages/ErrorPage/ErrorPage.jsx';
+import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
 
 
 const router = createBrowserRouter([
@@ -50,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <Dashboard />
+        element: <Dashboard/>
       },
       {
         path: '/groups-joined',

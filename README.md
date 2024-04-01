@@ -1,7 +1,23 @@
 # SkillSetGo
-Skill sharing web app 
+SkillSetGo connects you with a global community of professionals eager to trade a skill. 
+Simply create a profile showcasing your talents, browse through a diverse range of skills offered by others, and connect instantly!
+
+# Usage
 
 
+
+# Credits
+
+### Diana Tran
+[GitHub Profile](https://github.com/dtran44)
+
+### Philip Adeniyi
+[GitHub Profile](https://github.com/ocean-8)
+
+### Joshua Jones 
+[GitHub Profile](https://github.com/j0shuaj0nes)
+
+## Link to Depolyed Web App
 
 # References 
 
