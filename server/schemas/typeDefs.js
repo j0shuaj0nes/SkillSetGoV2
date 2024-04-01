@@ -9,8 +9,8 @@ const typeDefs = `
     followers: [User]
     groups: [Group]
     country: String
-    skillsOffering: String
-    skillsInterestedIn: String
+    skillsOffering: [String]
+    skillsInterestedIn: [String]
   }
 
   type Group {
@@ -38,14 +38,14 @@ const typeDefs = `
       email: String,
       password: String,
       country: String,
-      skillsOffering: String,
-      skillsInterestedIn: String
+      skillsOffering: [String],
+      skillsInterestedIn: [String]
     ): Auth
     
     updateUser(
       _id: ID!, 
       username: String, 
-      email: String, country: String, skillsOffering: String, skillsInterestedIn: String): User 
+      email: String, country: String, skillsOffering: [String], skillsInterestedIn: [String]): User 
     
       deleteUser(_id: ID!): Boolean
     

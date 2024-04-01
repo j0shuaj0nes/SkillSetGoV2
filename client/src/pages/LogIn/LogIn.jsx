@@ -51,6 +51,7 @@ export function LogIn() {
 
 
       Auth.login(data.login.token);
+      window.location.href = '/dashboard';
     } catch (e) {
       console.error('Login failed:', e);
     }
