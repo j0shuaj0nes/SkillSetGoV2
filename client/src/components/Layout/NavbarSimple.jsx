@@ -13,7 +13,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Link } from "react-router-dom";
 
 const data = [
-  { href: "/profile", label: "Profile", icon: IconUserCircle },
+  { href: "/profile-login", label: "Profile", icon: IconUserCircle },
   { href: "/groups-joined", label: "Groups", icon: IconUsersGroup },
   { href: "/user-following", label: "Following", icon: IconFriends },
   { href: "/groups", label: "Connect", icon: IconPlugConnected },
@@ -28,8 +28,7 @@ export function NavbarSimple() {
 
   const items = data.map((item, index) => (
     <NavLink
-      component={Link}
-      to={item.href}
+      component={Link} to={item.href}
       key={item.label}
       active={index === active}
       label={item.label}

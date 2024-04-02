@@ -11,68 +11,24 @@ import {
 import { IconTrash } from "@tabler/icons-react";
 import { useQuery, useMutation } from "@apollo/client";
 import { useParams, Navigate } from "react-router-dom"; // Import Navigate for redirection
-import { QUERY_USER, QUERY_ME } from "../../utils/queries.js";
+import { QUERY_ME } from "../../utils/queries.js";
 import { LEAVE_GROUP } from "../../utils/mutations";
 import Auth from "../../utils/auth.js";
 
 export function GroupsJoined() {
-  const { username: userParam } = useParams();
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
-  const user = data?.me || data?.user || {};
+  const { loading, error, data } = useQuery(QUERY_ME);
+  const { me } = data || {};
 
-  // Log the loaded data and user information
-  console.log("Loading:", loading);
-  console.log("Data:", data);
-  console.log("User:", user);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  // Redirect if the user is not authenticated
-  if (
-    Auth.loggedIn() &&
-    Auth.getProfile().authenticatedPerson.username === userParam
-  ) {
-    return <Navigate to="/groups-joined" />;
-  }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!user?.username) {
-    return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
-    );
-  }
-
-  const [leaveGroupMutation] = useMutation(LEAVE_GROUP, {
-    refetchQueries: [
-      {
-        query: userParam ? QUERY_USER : QUERY_ME,
-        variables: { username: userParam },
-      },
-    ],
-  });
-
-  const handleLeaveGroup = async (groupId) => {
-    try {
-      await leaveGroupMutation({
-        variables: { groupId },
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  const rows = user.groups.map((group) => (
-    <Table.Tr key={group.id}>
+  const rows = data.groups.map((me, index) => (
+    <Table.Tr key={index}>
       <Table.Td>
         <Group gap="sm">
           <Text fz="sm" fw={500}>
-            {group.name}
+            {me.group}
           </Text>
         </Group>
       </Table.Td>
@@ -82,7 +38,7 @@ export function GroupsJoined() {
           <ActionIcon
             variant="subtle"
             color="red"
-            onClick={() => handleLeaveGroup(group.id)}
+            // onClick={() => handleLeaveGroup(group.id)}
           >
             <IconTrash
               style={{ width: rem(16), height: rem(16) }}

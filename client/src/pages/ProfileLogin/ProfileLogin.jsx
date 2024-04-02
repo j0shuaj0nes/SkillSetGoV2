@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Title,
   Text,
@@ -13,56 +14,36 @@ import {
 } from '@mantine/core';
 import { IconSwords, IconWorldStar, IconPencil } from '@tabler/icons-react';
 import classes from './Profile.module.css';
-import { Navigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
-import { QUERY_USER, QUERY_ME } from '../../utils/queries.js';
-import Auth from '../../utils/auth.js';
+import { QUERY_ME } from '../../utils/queries.js';
 
 const ProfileLogin = () => {
   const theme = useMantineTheme();
-  const { username: userParam } = useParams();
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
-  });
+  const { loading, error, data } = useQuery(QUERY_ME);
+  const { me } = data || {};
 
-  const user = data?.me || data?.user || {};
-
-  // if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
-  //   return <Navigate to="/dashboard" />;
-  // }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   const userdata = [
     {
-      username: userParam ? user.username : '',
-      givenName: userParam ? user.givenName : '',
-      familyName: userParam ? user.familyName : '',
-      email: userParam ? user.email : '',
-      country: userParam ? user.country : '',
+      username: me.username || '',
+      givenName: me.givenName || '',
+      familyName: me.familyName || '',
+      email: me.email || '',
+      country: me.country || '',
     },
   ];
 
   const skillsData = [
     {
       title: 'Skills Offering',
-      description: userParam ? user.skillsOffering: '',
+      description: me ? me.skillsOffering : '',
       icon: IconSwords,
     },
     {
       title: 'Skills interested in acquiring',
-      description: userParam ? user.sillsInterestedIn : '',
+      description: me ? me.skillsInterestedIn : '',
       icon: IconWorldStar,
     }
   ];
@@ -103,12 +84,11 @@ const ProfileLogin = () => {
         <Text fz="sm">{item.country}</Text>
       </Table.Td>
       <Table.Td>
-
         <Group gap={0} justify="flex-end">
-            <ActionIcon variant="subtle" color="gray">
-              <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-            </ActionIcon>
-          </Group>
+          <ActionIcon variant="subtle" color="gray">
+            <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+          </ActionIcon>
+        </Group>
       </Table.Td>
     </Table.Tr>
   ));

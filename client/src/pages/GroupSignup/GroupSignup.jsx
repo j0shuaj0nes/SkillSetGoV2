@@ -17,7 +17,7 @@ import {
   import { Link } from 'react-router-dom';
   import { useMutation } from "@apollo/client";
 import { JOIN_GROUP } from "../../utils/mutations";
-import Auth from "../../utils/auth";
+
 
 const data = [
   {
@@ -57,21 +57,22 @@ const data = [
   },
 ];
 
-
-
 const GroupSignup = () => {
+  // const [joinGroup, { error, data }] = useMutation(JOIN_GROUP);
 
-//   const [joingroup, { error, data }] = useMutation(JOIN_GROUP);
-//   const handleChange = (event) => {
-//     const { join } = event.target;
-//   };
-// try {
-//   const { data } = await joingroup({
-//   });
-//   console.log(data);
-//   Auth.login(data.joingroup.token);
+  // const handleSignup = async () => {
+  //   try {
+  //     const response = await joinGroup({
+  //       variables: { groupId } // Pass group ID to the mutation
+  //     });
+  //     console.log(response.data);
+      
+      
+  //   } catch (error) {
+  //     console.error('Error occurred during group signup:', error);
+  //   }
+  // };
 
-// }},
     const theme = useMantineTheme();
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
     const features = data.map((feature, index) => (
@@ -88,7 +89,7 @@ const GroupSignup = () => {
             {feature.description}
           </Text>
           <Link to={`/dashboard`}>
-            <Button  onChange={handleChange} fullWidth className={classes.button}>
+            <Button fullWidth className={classes.button}>
               <div className={classes.label}>Join</div>
             </Button>
             </Link>
