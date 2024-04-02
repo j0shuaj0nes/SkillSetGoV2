@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Groups.css';
+import classes from './GroupSignup.css';
 import {
     Badge,
     Group,
@@ -15,8 +15,6 @@ import {
   } from '@mantine/core';
   import { IconCode, IconGavel, IconCash, IconMessage2Share, IconCategory2, IconChartPie } from '@tabler/icons-react';
   import { Link } from 'react-router-dom';
-//   import { useQuery } from '@apollo/client';
-//   import { QUERY_ME } from '../../utils/queries';
   
 
 const data = [
@@ -58,11 +56,8 @@ const data = [
 ];
 
 
-const GroupPage = () => {
+const GroupSignup = () => {
     const theme = useMantineTheme();
-    // const { loading, error, data } = useQuery(QUERY_ME);
-    // if (loading) return <p>Loading...</p>;
-    // if (error) return <p>Error: {error.message}</p>;
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
     const features = data.map((feature, index) => (
         <Card key={feature.title} shadow="md" radius="md" padding="xl">
@@ -73,16 +68,16 @@ const GroupPage = () => {
           />
           <Text fz="lg" fw={500} mt="md">
             {feature.title}
-            {/* {me.username} */}
           </Text>
           <Text fz="sm" c="dimmed" mt="sm">
             {feature.description}
           </Text>
-          <Link to={`/groups/${categories[index]}`}>
+          <Link to={`/dashboard`}>
             <Button fullWidth className={classes.button}>
-              <div className={classes.label}>Meet Experts</div>
+              <div className={classes.label}>Join</div>
             </Button>
-          </Link>
+            </Link>
+          
         </Card>
       ));
       return (
@@ -108,4 +103,4 @@ const GroupPage = () => {
   );
 };
 
-export default GroupPage;
+export default GroupSignup;

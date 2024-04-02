@@ -41,10 +41,12 @@ const client = new ApolloClient({
 });
 
 export default function App() {
+
+
   return (
     <ApolloProvider client={client}>
       <MantineProvider  >
-
+        
         <Outlet />
         {/* <div className="flex-column justify-flex-start min-100-vh">
           <Header />

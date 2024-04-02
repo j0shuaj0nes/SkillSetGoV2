@@ -186,6 +186,23 @@ const resolvers = {
   },
 }
 
+   // addFollower: async (_, { userId }) => {
+    //   try {
+    //     const group = await User.findByIdAndUpdate(
+    //       {_id:userId},
+    //       { $addToSet: { followers: userId } },
+    //       { new: true, runValidators: true }
+    //     );
+
+    //     if (!user) {
+    //       throw new Error('User not found!');
+    //     }
+    //     return user;
+    //   } catch (error) {
+    //     throw new Error(error.message);
+    //   }
+    // },
+
 module.exports = resolvers;
 
  // deleteUser: async (_, { _id }, context) => {

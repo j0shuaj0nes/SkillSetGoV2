@@ -22,6 +22,7 @@ export function ContactUs() {
   ));
 
   return (
+   
     <div className={classes.wrapper}>
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={50}>
         <div>
@@ -62,5 +63,6 @@ export function ContactUs() {
         </div>
       </SimpleGrid>
     </div>
+   
   );
 }
