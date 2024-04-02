@@ -11,7 +11,7 @@ import {
   MultiSelect
 } from "@mantine/core";
 import classes from "./Signup.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import { useMutation } from "@apollo/client";
@@ -34,6 +34,7 @@ export function Signup() {
 
   });
   const [addUser, { error, data }] = useMutation(ADD_USER);
+  const navigate = useNavigate()
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -43,6 +44,15 @@ export function Signup() {
       [name]: value,
     });
   };
+
+  function handleMultiSelect(name){
+    return function(val){
+      setFormState({
+        ...formState,
+        [name]: val,
+      })
+    }
+  }
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -56,8 +66,9 @@ export function Signup() {
       console.log(data);
       Auth.login(data.addUser.token);
 
-      // Redirect to group page after successful signup
-      window.location.href = '/group-signup';
+      // Redirect to dashboard after successful signup
+      // history.push("/dashboard");
+      navigate('/group-signup');
     } catch (e) {
       console.error('Login failed:', e);
 
@@ -66,15 +77,7 @@ export function Signup() {
   return (
     <div className={classes.wrapper}>
 
-      {data ? (
-        <p>
-          Success! You may now head{" "}
-          <Anchor component={Link} to="/group-signup">
-            to the dashboard.
-
-          </Anchor>
-        </p>
-      ) : (
+      
         <form onSubmit={handleFormSubmit}>
           <Paper className={classes.form} radius={0} p={30}>
             <Title
@@ -133,7 +136,7 @@ export function Signup() {
             <MultiSelect
               name="skillsOffering"
               label="Skills Offering"
-              onChange={handleChange}
+              onChange={handleMultiSelect('skillsOffering')}
               placeholder="Select one or more"
               data={[
                 "SQL",
@@ -161,7 +164,7 @@ export function Signup() {
             <MultiSelect
               name="skillsInterestedIn"
               label="Skills Interested In"
-              onChange={handleChange}
+              onChange={handleMultiSelect('skillsInterestedIn')}
               placeholder="Select one or more"
               data={[
                 "SQL",
@@ -203,7 +206,7 @@ export function Signup() {
             </Text>
           </Paper>
         </form>
-      )}
+      
 
       {error && (
         <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
