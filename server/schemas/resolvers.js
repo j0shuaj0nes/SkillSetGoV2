@@ -13,14 +13,14 @@ const resolvers = {
       const params = username ? { username } : {};
       return Group.find(params).sort({ createdAt: -1 });
     },
-    group: async (parent, { groupId }) => {
-      return Group.findOne({ _id: groupId });
+    group: async (parent, { name }) => {
+      return Group.findOne({ name: name });
     },
   },
 
   Mutation: {
-    addUser: async (parent, { username, email, password, givenName, familyName, country, skillsOffering, skillsInterestedIn }) => {
-      const user = await User.create({ username, email, password, givenName, familyName, country, skillsOffering, skillsInterestedIn });
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -41,17 +41,17 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, { _id, username, email, country, skillsOffering, skillsInterestedIn }, context) => {
+    updateUser: async (_, { username, email, country, skillsOffering, skillsInterestedIn }, context) => {
       if (context.user) {
         const updateFields = {};
         if (username) updateFields.username = username;
         if (email) updateFields.email = email;
-        if (familyName) updateFields.country = country;
-        if (familyName) updateFields.skillsOffering = skillsOffering;
-        if (familyName) updateFields.skillsInterestedIn = skillsInterestedIn;
+        if (country) updateFields.country = country;
+        if (skillsOffering) updateFields.skillsOffering = skillsOffering;
+        if (skillsInterestedIn) updateFields.skillsInterestedIn = skillsInterestedIn;
     
         const updatedUser = await User.findByIdAndUpdate(
-          _id,
+          {_id:context.user._id},
           updateFields,
           { new: true, runValidators: true }
         );
@@ -82,7 +82,7 @@ const resolvers = {
     joinGroup: async (_, { userId, groupId }) => {
       try {
         const group = await Group.findByIdAndUpdate(
-          groupId,
+          {_id:groupId},
           { $addToSet: { members: userId } },
           { new: true }
         );
@@ -90,8 +90,17 @@ const resolvers = {
         if (!group) {
           throw new Error('Group not found!');
         }
-
-        return group;
+        
+      const addGrouptoUser = await User.findByIdAndUpdate(
+        {_id:userId},
+        { $addToSet: { groups: groupId } },
+        { new: true }
+      )
+      if (!addGrouptoUser) {
+        throw new Error('User not found!');
+      }
+       
+      return group;
       } catch (error) {
         throw new Error(error.message);
       }
@@ -101,7 +110,7 @@ const resolvers = {
       try {
         // Find the group by ID and remove the user from the members array
         const group = await Group.findByIdAndUpdate(
-          groupId,
+          {_id:groupId},
           { $pull: { members: userId } },
           { new: true }
         );
@@ -110,6 +119,14 @@ const resolvers = {
           throw new Error('Group not found!');
         }
 
+      const RemoveGroupfromUser = await User.findByIdAndUpdate(
+        {_id:userId},
+        { $pull: { groups: groupId } },
+        { new: true }
+      )
+      if (!RemoveGroupfromUser) {
+        throw new Error('User not found!');
+      }
         return group;
       } catch (error) {
         throw new Error(error.message);
@@ -122,7 +139,7 @@ const resolvers = {
           { _id },
           {
             $addToSet: {
-              followers: context._id,
+              followers: context.user._id,
             },
           },
           {
@@ -138,10 +155,10 @@ const resolvers = {
     deleteFollower: async (_, { _id }, context) => {
       if (context.user) {
         const user = await User.findOneAndUpdate(
-          { _id: context.user._id }, // Assuming context.user contains the authenticated user's data
+          { _id }, // Assuming context.user contains the authenticated user's data
           {
             $pull: {
-              followers: _id, // Remove the specified follower ID from the followers array
+              followers: context.user._id,
             },
           },
           {
@@ -149,7 +166,7 @@ const resolvers = {
             runValidators: true,
           }
         );
-    
+  
         return user;
       }
     
@@ -200,3 +217,21 @@ module.exports = resolvers;
   //   }
   //   throw AuthenticationError;
   // },
+
+
+   // addFollower: async (_, { userId }) => {
+    //   try {
+    //     const group = await User.findByIdAndUpdate(
+    //       {_id:userId},
+    //       { $addToSet: { followers: userId } },
+    //       { new: true, runValidators: true }
+    //     );
+
+    //     if (!user) {
+    //       throw new Error('User not found!');
+    //     }
+    //     return user;
+    //   } catch (error) {
+    //     throw new Error(error.message);
+    //   }
+    // },

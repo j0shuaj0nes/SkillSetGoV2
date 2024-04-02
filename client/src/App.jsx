@@ -1,5 +1,11 @@
 import '@mantine/core/styles.css';
+import React from 'react';
+import MyPage from './pages/Groups/Groups';
+import UserListPage from './pages/UserCard/UserCard';
+
 import { MantineProvider } from '@mantine/core';
+
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -8,9 +14,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
-import AppLayout from './components/Layout/Layout';
-import { useState } from 'react';
-
 
 
 // Construct our main GraphQL API endpoint
@@ -38,18 +41,20 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-   // Here we declare a state boolean variable "loggedIn" and a function to update it.
-   const [loggedIn, setLoggedIn] = useState(false);
-
   return (
     <ApolloProvider client={client}>
       <MantineProvider  >
-        <div>
-        <AppLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-        </div>
+
         <Outlet />
+        {/* <div className="flex-column justify-flex-start min-100-vh">
+          <Header />
+          <div className="container">
+          </div>
+          <Footer />
+        </div> */}
       </MantineProvider>
     </ApolloProvider>
   );
 }
+
 

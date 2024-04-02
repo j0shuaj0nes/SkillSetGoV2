@@ -3,30 +3,34 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
 import './index.css'
 
 import App from './App.jsx'
+import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
+// import SingleThought from './pages/SingleThought';
+// import Profile from './pages/Profile';
+import Error from './pages/Error';
 import { ContactUs } from './pages/ContactUs/ContactUs.jsx';
-import { LandingPage } from './pages/LandingPage/LandingPage.jsx';
-import { LogIn } from './pages/LogIn/LogIn.jsx';
-import Chatbox from './pages/ChatBox/ChatBox.jsx';
-import { Signup } from './pages/Signup/Signup.jsx';
-import { LogOut } from './pages/Logout/Logout.jsx';
-import { GroupsJoined } from './pages/GroupsJoined/GroupsJoined.jsx';
-import { UserFollowing } from './pages/UserFollowing/UserFollowing.jsx';
-import ProfileLogin from './pages/ProfileLogin/ProfileLogin.jsx';
-import { ErrorPage } from './pages/ErrorPage/ErrorPage.jsx';
-import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
-
+import Groups from './pages/Groups/Groups.jsx';
+import UserCard from './pages/UserCard/UserCard.jsx';
+import Coding from './pages/Coding/Coding.jsx';
+import Finance from './pages/Finance/Finance.jsx';
+import Investing from './pages/Investing/Investing.jsx';
+import Communication from './pages/Communication/Communication.jsx';
+import Following from './pages/Following/Following.jsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    error: <ErrorPage />,
+    error: <Error />,
     children: [
       {
         index: true,
-        element: <LandingPage />
-      }, 
-      {
+        element: <Home />
+      }, {
+        path: '/login',
+        element: <Login />
+      }, {
         path: '/signup',
         element: <Signup />
       },
@@ -35,39 +39,33 @@ const router = createBrowserRouter([
         element: <ContactUs />
       },
       {
-        path: '/login',
-        element: <LogIn />
+        path: '/groups',
+        element: <Groups />
       },
       {
-        path: '/logout',
-        element: <LogOut />
-      },
-      
-      {
-        path: '/chatbox',
-        element: <Chatbox />
+        path: '/usercard',
+        element: <UserCard />
       },
       {
-        path: '/dashboard',
-        element: <Dashboard/>
+        path: '/groups/coding',
+        element: <Coding />
       },
       {
-        path: '/groups-joined',
-        element: <GroupsJoined />
+        path: '/groups/finance',
+        element: <Finance />
       },
       {
-        path: '/user-following',
-        element: <UserFollowing />
+        path: '/groups/communication',
+        element: <Communication />
       },
       {
-        path: '/profile-login',
-        element: <ProfileLogin/>
+        path: '/groups/investing',
+        element: <Investing />
       },
       {
-        path: '/error-page',
-        element: <ErrorPage />
+        path: '/following/:id',
+        element: <Following />
       },
-    
     ]
   }
 ])

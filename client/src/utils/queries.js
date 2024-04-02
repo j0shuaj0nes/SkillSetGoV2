@@ -37,33 +37,17 @@ export const QUERY_SINGLE_GROUP = gql`
   }
 `;
 
-export const QUERY_ME = gql`
-  query me {
-    me {
-      _id
-      username
-      givenName
-      familyName
-      email
-      country
-      skillsOffering
-      skillsInterestedIn
-      groups {
-        _id
-        name
-      }
-      followers {
-        _id
-        username
-        givenName
-        familyName
-        email
-        groups {
-          _id
-          name
-        }
-      }
-    }
-  }
-`;
+// export const QUERY_ME = gql`
+//   query me {
+//     me {
+//       _id
+//       username
+//       email
+//       groups {
+//         _id
+//         name
+//       }
+//     }
+//   }
+// `;
 
