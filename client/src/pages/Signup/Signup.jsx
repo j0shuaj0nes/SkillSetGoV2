@@ -68,7 +68,7 @@ export function Signup() {
 
       // Redirect to dashboard after successful signup
       // history.push("/dashboard");
-      navigate('/dashboard');
+      navigate('/group-signup');
     } catch (e) {
       console.error('Login failed:', e);
 
@@ -77,15 +77,7 @@ export function Signup() {
   return (
     <div className={classes.wrapper}>
 
-      {data ? (
-        <p>
-          Success! You may now head{" "}
-          <Anchor component={Link} to="/group-signup">
-            to the dashboard.
-
-          </Anchor>
-        </p>
-      ) : (
+      
         <form onSubmit={handleFormSubmit}>
           <Paper className={classes.form} radius={0} p={30}>
             <Title
@@ -214,7 +206,7 @@ export function Signup() {
             </Text>
           </Paper>
         </form>
-      )}
+      
 
       {error && (
         <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
