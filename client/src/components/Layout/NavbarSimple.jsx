@@ -5,15 +5,18 @@ import {
   IconMailbox,
   IconMessageChatbot,
   IconUserCircle,
+  IconPlugConnected,
   IconUsersGroup,
 } from "@tabler/icons-react";
 import { Box, NavLink, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { Link } from "react-router-dom";
 
 const data = [
   { href: "/profile", label: "Profile", icon: IconUserCircle },
   { href: "/groups-joined", label: "Groups", icon: IconUsersGroup },
   { href: "/user-following", label: "Following", icon: IconFriends },
+  { href: "/groups", label: "Connect", icon: IconPlugConnected },
   { href: "/chatbox", label: "Chatbox", icon: IconMessageChatbot },
   { href: "/contact-us", label: "Contact us", icon: IconMailbox },
   { href: "/logout", label: "Logout", icon: IconLogout },
@@ -25,7 +28,8 @@ export function NavbarSimple() {
 
   const items = data.map((item, index) => (
     <NavLink
-      href={item.href}
+      component={Link}
+      to={item.href}
       key={item.label}
       active={index === active}
       label={item.label}

@@ -80,7 +80,7 @@ export function Signup() {
       {data ? (
         <p>
           Success! You may now head{" "}
-          <Anchor component={Link} to="/dashboard">
+          <Anchor component={Link} to="/group-signup">
             to the dashboard.
 
           </Anchor>

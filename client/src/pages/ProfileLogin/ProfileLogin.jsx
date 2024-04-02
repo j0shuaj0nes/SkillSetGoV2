@@ -7,6 +7,8 @@ import {
   Container,
   rem,
   Table,
+  Group,
+  ActionIcon,
   useMantineTheme,
 } from '@mantine/core';
 import { IconSwords, IconWorldStar, IconPencil } from '@tabler/icons-react';
@@ -25,22 +27,22 @@ const ProfileLogin = () => {
 
   const user = data?.me || data?.user || {};
 
-  if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
-    return <Navigate to="/dashboard" />;
-  }
+  // if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
+  //   return <Navigate to="/dashboard" />;
+  // }
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
-  if (!user?.username) {
-    return (
-      <h4>
-        You need to be logged in to see this. Use the navigation links above to
-        sign up or log in!
-      </h4>
-    );
-  }
+  // if (!user?.username) {
+  //   return (
+  //     <h4>
+  //       You need to be logged in to see this. Use the navigation links above to
+  //       sign up or log in!
+  //     </h4>
+  //   );
+  // }
 
   const userdata = [
     {
@@ -100,11 +102,14 @@ const ProfileLogin = () => {
       <Table.Td>
         <Text fz="sm">{item.country}</Text>
       </Table.Td>
-      <Group gap={0} justify="flex-end">
-          <ActionIcon variant="subtle" color="gray">
-            <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-          </ActionIcon>
-        </Group>
+      <Table.Td>
+
+        <Group gap={0} justify="flex-end">
+            <ActionIcon variant="subtle" color="gray">
+              <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            </ActionIcon>
+          </Group>
+      </Table.Td>
     </Table.Tr>
   ));
 

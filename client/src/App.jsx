@@ -38,15 +38,12 @@ const client = new ApolloClient({
 });
 
 export default function App() {
-   // Here we declare a state boolean variable "loggedIn" and a function to update it.
-   const [loggedIn, setLoggedIn] = useState(false);
+
 
   return (
     <ApolloProvider client={client}>
       <MantineProvider  >
-        <div>
-        <AppLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
-        </div>
+        
         <Outlet />
       </MantineProvider>
     </ApolloProvider>
