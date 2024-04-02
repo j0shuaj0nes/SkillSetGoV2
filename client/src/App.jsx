@@ -45,6 +45,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <MantineProvider  >
         <div>
+        {/* <AppLayout/>  */}
         <AppLayout loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
         </div>
         <Outlet />

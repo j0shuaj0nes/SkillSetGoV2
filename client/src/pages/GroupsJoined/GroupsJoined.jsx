@@ -10,7 +10,7 @@ import {
 } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 import { useQuery, useMutation } from "@apollo/client";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom"; // Import Navigate for redirection
 import { QUERY_USER, QUERY_ME } from "../../utils/queries.js";
 import { LEAVE_GROUP } from "../../utils/mutations";
 import Auth from "../../utils/auth.js";
@@ -22,6 +22,12 @@ export function GroupsJoined() {
   });
   const user = data?.me || data?.user || {};
 
+  // Log the loaded data and user information
+  console.log("Loading:", loading);
+  console.log("Data:", data);
+  console.log("User:", user);
+
+  // Redirect if the user is not authenticated
   if (
     Auth.loggedIn() &&
     Auth.getProfile().authenticatedPerson.username === userParam

@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
+const User = require('./User');
 
 const groupSchema = new Schema({
   name: {
@@ -9,6 +10,10 @@ const groupSchema = new Schema({
     maxlength: 280,
     trim: true,
   },
+  members:[{
+    type: Schema.Types.ObjectId,
+    ref: "User"
+  }]
 });
 
 const Group = model('Group', groupSchema);

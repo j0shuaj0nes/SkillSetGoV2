@@ -5,6 +5,7 @@ import {
   IconMailbox,
   IconMessageChatbot,
   IconUserCircle,
+  IconPlugConnected,
   IconUsersGroup,
 } from "@tabler/icons-react";
 import { Box, NavLink, Burger } from "@mantine/core";
@@ -14,6 +15,7 @@ const data = [
   { href: "/profile", label: "Profile", icon: IconUserCircle },
   { href: "/groups-joined", label: "Groups", icon: IconUsersGroup },
   { href: "/user-following", label: "Following", icon: IconFriends },
+  { href: "/groups", label: "Connect", icon: IconPlugConnected },
   { href: "/chatbox", label: "Chatbox", icon: IconMessageChatbot },
   { href: "/contact-us", label: "Contact us", icon: IconMailbox },
   { href: "/logout", label: "Logout", icon: IconLogout },

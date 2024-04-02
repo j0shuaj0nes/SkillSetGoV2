@@ -56,9 +56,8 @@ export function Signup() {
       console.log(data);
       Auth.login(data.addUser.token);
 
-      // Redirect to dashboard after successful signup
-      // history.push("/dashboard");
-      window.location.href = '/dashboard';
+      // Redirect to group page after successful signup
+      window.location.href = '/group-signup';
     } catch (e) {
       console.error('Login failed:', e);
 
@@ -70,7 +69,7 @@ export function Signup() {
       {data ? (
         <p>
           Success! You may now head{" "}
-          <Anchor component={Link} to="/dashboard">
+          <Anchor component={Link} to="/group-signup">
             to the dashboard.
 
           </Anchor>

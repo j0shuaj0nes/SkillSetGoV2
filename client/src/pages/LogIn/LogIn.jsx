@@ -30,10 +30,9 @@ export function LogIn() {
   };
 
   useEffect(() => {
-    console.log('formState', formState);
+    // console.log('formState', formState);
   }, [formState]);
 
-  console.log('formState',formState)
 
   // submit form
   const handleFormSubmit = async (event) => {
@@ -69,7 +68,7 @@ export function LogIn() {
       {data ? (
         <p>
           Success! You may now head{' '}
-          <Link to="/">to the dashboard.</Link>
+          <Link to="/dashboard">to the dashboard.</Link>
         </p>
       ) : (
         <form onSubmit={handleFormSubmit}>

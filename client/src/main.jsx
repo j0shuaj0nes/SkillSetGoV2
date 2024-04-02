@@ -14,7 +14,16 @@ import { UserFollowing } from './pages/UserFollowing/UserFollowing.jsx';
 import ProfileLogin from './pages/ProfileLogin/ProfileLogin.jsx';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage.jsx';
 import { Dashboard } from './pages/Dashboard/Dashboard.jsx';
-
+import Groups from './pages/Groups/Groups.jsx';
+import UserCard from './pages/UserCard/UserCard.jsx';
+import Coding from './pages/Coding/Coding.jsx';
+import Finance from './pages/Finance/Finance.jsx';
+import Investing from './pages/Investing/Investing.jsx';
+import Communication from './pages/Communication/Communication.jsx';
+import Following from './pages/Following/Following.jsx';
+import GroupSignup from './pages/GroupSignup/GroupSignup.jsx';
+import AppLayout from './components/Layout/Layout.jsx';
+import { NavbarSimple } from './components/Layout/NavbarSimple.jsx';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +77,46 @@ const router = createBrowserRouter([
         element: <ErrorPage />
       },
     
+      {
+        path: '/groups',
+        element: <Groups />
+      },
+      {
+        path: '/usercard',
+        element: <UserCard />
+      },
+      {
+        path: '/groups/coding',
+        element: <Coding/>
+      },
+      {
+        path: '/groups/finance',
+        element: <Finance />
+      },
+      {
+        path: '/groups/communication',
+        element: <Communication />
+      },
+      {
+        path: '/groups/investing',
+        element: <Investing />
+      },
+      {
+        path: '/following/:id',
+        element: <Following />
+      },
+      {
+        path: '/group-signup',
+        element: <GroupSignup />
+      },
+      {
+        path: '/layout',
+        element: <AppLayout/>
+      },
+      {
+        path: '/navbar',
+        element: <NavbarSimple/>
+      },
     ]
   }
 ])

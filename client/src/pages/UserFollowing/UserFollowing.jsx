@@ -7,6 +7,9 @@ import { DELETE_FOLLOWER } from '../../utils/mutations.js';
 
 export function UserFollowing() {
   const { loading, data } = useQuery(QUERY_ME);
+  console.log('Loading:', loading);
+  console.log('Data:', data);
+
   const followers = data?.followers || [];
   
   const [deleteFollowerMutation] = useMutation(DELETE_FOLLOWER, {
@@ -14,37 +17,41 @@ export function UserFollowing() {
   });
 
   const handleDeleteFollower = (followerId) => {
+    console.log('Deleting follower with ID:', followerId);
     deleteFollowerMutation({
       variables: { _id: followerId }
     });
   };
 
-  const rows = followers.map((follower) => (
-    <Table.Tr key={follower._id}>
-      <Table.Td>
-        <Group gap="sm">
-          <Avatar size={30} src={follower.avatar} radius={30} />
-          <Text fz="sm" fw={500}>
-            {loading ? (
-              <div>Loading...</div>
-            ) : (
-              follower.username
-            )}
-          </Text>
-        </Group>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{follower.groups}</Text>
-      </Table.Td>
-      <Table.Td>
-        <Group gap={0} justify="center">
-          <ActionIcon variant="subtle" color="red" onClick={() => handleDeleteFollower(follower._id)}>
-            <IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </Table.Td>
-    </Table.Tr>
-  ));
+  const rows = followers.map((follower) => {
+    console.log('Follower:', follower);
+    return (
+      <Table.Tr key={follower._id}>
+        <Table.Td>
+          <Group gap="sm">
+            <Avatar size={30} src={follower.avatar} radius={30} />
+            <Text fz="sm" fw={500}>
+              {loading ? (
+                <div>Loading...</div>
+              ) : (
+                follower.username
+              )}
+            </Text>
+          </Group>
+        </Table.Td>
+        <Table.Td>
+          <Text fz="sm">{follower.groups}</Text>
+        </Table.Td>
+        <Table.Td>
+          <Group gap={0} justify="center">
+            <ActionIcon variant="subtle" color="red" onClick={() => handleDeleteFollower(follower._id)}>
+              <IconTrash style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+            </ActionIcon>
+          </Group>
+        </Table.Td>
+      </Table.Tr>
+    );
+  });
 
   return (
     <Container size="xxl" py="xs">
