@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Box, NavLink, Burger } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { Link } from "react-router-dom";
 
 const data = [
   { href: "/profile", label: "Profile", icon: IconUserCircle },
@@ -27,7 +28,8 @@ export function NavbarSimple() {
 
   const items = data.map((item, index) => (
     <NavLink
-      href={item.href}
+      component={Link}
+      to={item.href}
       key={item.label}
       active={index === active}
       label={item.label}

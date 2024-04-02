@@ -30,6 +30,21 @@ const typeDefs = `
     group(name: String!): Group
   }
 
+  type Query {
+  me(
+    username: String
+    givenName: String,
+    familyName: String,
+    email: String,
+    country: String,
+    skillsOffering: [String],
+    skillsInterestedIn: [String],
+    groups: [Group],
+    followers: [Followers]
+
+  ): Auth
+
+
   type Mutation {
     addUser(
       username: String
@@ -42,6 +57,7 @@ const typeDefs = `
       skillsInterestedIn: [String]
     ): Auth
     
+
     updateUser(
       _id: ID!, 
       username: String, 
