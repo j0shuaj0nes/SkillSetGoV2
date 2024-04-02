@@ -23,17 +23,16 @@ export function LogIn() {
   const handleChange = async (event) => {
     const { name, value } = event.target;
 
-    await setFormState({
+    setFormState({
       ...formState,
       [name]: value,
     });
   };
 
   useEffect(() => {
-    console.log('formState', formState);
+    // console.log('formState', formState);
   }, [formState]);
 
-  console.log('formState',formState)
 
   // submit form
   const handleFormSubmit = async (event) => {
@@ -69,7 +68,7 @@ export function LogIn() {
       {data ? (
         <p>
           Success! You may now head{' '}
-          <Link to="/">to the dashboard.</Link>
+          <Link to="/dashboard">to the dashboard.</Link>
         </p>
       ) : (
         <form onSubmit={handleFormSubmit}>
@@ -78,8 +77,8 @@ export function LogIn() {
             Welcome back to SkillSetGo!
           </Title>
 
-          <TextInput onChange={(e) => handleChange(e)} label="Email address" placeholder="hello@gmail.com" size="md" />
-          <PasswordInput onChange={handleChange} label="Password" placeholder="Your password" mt="md" size="md" />
+          <TextInput name="email" onChange={(e) => handleChange(e)} label="Email address" placeholder="hello@gmail.com" size="md" />
+          <PasswordInput onChange={handleChange} label="Password" placeholder="Your password" name="password" mt="md" size="md" />
           <Checkbox label="Keep me logged in" mt="xl" size="md" />
           <Button fullWidth mt="xl" size="md" type="submit">
             Login
