@@ -44,7 +44,6 @@ export const DELETE_USER_MUTATION = gql`
 `;
 
 
-
 export const JOIN_GROUP = gql`
   mutation JoinGroup($userId: ID!, $groupId: ID!) {
     joinGroup(userId: $userId, groupId: $groupId) {

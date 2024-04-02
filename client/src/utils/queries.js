@@ -15,6 +15,10 @@ export const QUERY_USER = gql`
         _id
         name
       }
+      followers {
+        _id
+        name
+      }
     }
   }
 `;
@@ -30,24 +34,24 @@ export const QUERY_GROUPS = gql`
 
 export const QUERY_SINGLE_GROUP = gql`
   query getSingleGroup($groupid: ID!) {
-    thought(groupid: $groupid) {
+    group (groupid: $groupid) {
       _id
       name
     }
   }
 `;
 
-// export const QUERY_ME = gql`
-//   query me {
-//     me {
-//       _id
-//       username
-//       email
-//       groups {
-//         _id
-//         name
-//       }
-//     }
-//   }
-// `;
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      groups {
+        _id
+        name
+      }
+    }
+  }
+`;
 

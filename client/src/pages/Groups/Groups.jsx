@@ -15,6 +15,9 @@ import {
   } from '@mantine/core';
   import { IconCode, IconGavel, IconCash, IconMessage2Share, IconCategory2, IconChartPie } from '@tabler/icons-react';
   import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { QUERY_ME } from '../../utils/queries';
+
   
 
 const data = [
@@ -56,9 +59,16 @@ const data = [
 ];
 
 
+
 const MyPage = () => {
     const theme = useMantineTheme();
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
+    // const {loading, data} = useQuery ()
+    const { loading, error, data } = useQuery(QUERY_ME);
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+    const { me } = data;
+
     const features = data.map((feature, index) => (
         <Card key={feature.title} shadow="md" radius="md" padding="xl">
           <feature.icon
@@ -68,6 +78,8 @@ const MyPage = () => {
           />
           <Text fz="lg" fw={500} mt="md">
             {feature.title}
+            {me.username}
+            const { data } = await
           </Text>
           <Text fz="sm" c="dimmed" mt="sm">
             {feature.description}

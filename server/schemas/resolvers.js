@@ -16,8 +16,19 @@ const resolvers = {
     group: async (parent, { name }) => {
       return Group.findOne({ name: name });
     },
-  },
+    me: async (parent, args, context) => {
+      if (!context.user) {
+        throw new Error('Authentication required');
+      }
+      try {
+        const user = await User.findById(context.user._id).populate('groups');
+        return user;
+      } catch (error) {
+        throw new Error('Error fetching user data');
+      }
+    },
 
+  },
   Mutation: {
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
@@ -173,7 +184,7 @@ const resolvers = {
       throw new AuthenticationError('Unauthorized');
     },
   },
-};
+}
 
 module.exports = resolvers;
 
