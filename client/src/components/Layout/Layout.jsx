@@ -32,6 +32,7 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
       header={{ height: 60 }}
       navbar={{
         width: 300,
+        
         breakpoint: "sm",
         collapsed: { mobile: !mobileOpened, desktop: !desktopOpened },
       }}
@@ -57,7 +58,7 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
       </AppShell.Header>
       {/* </Center> */}
 
-      <AppShell.Navbar p="sm">
+      <AppShell.Navbar p="sm" zIndex={5}>
         <NavbarSimple />
       </AppShell.Navbar>
 

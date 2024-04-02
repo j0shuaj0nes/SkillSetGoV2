@@ -15,7 +15,9 @@ import {
   } from '@mantine/core';
   import { IconCode, IconGavel, IconCash, IconMessage2Share, IconCategory2, IconChartPie } from '@tabler/icons-react';
   import { Link } from 'react-router-dom';
-  
+  import { useMutation } from "@apollo/client";
+import { JOIN_GROUP } from "../../utils/mutations";
+import Auth from "../../utils/auth";
 
 const data = [
   {
@@ -56,7 +58,20 @@ const data = [
 ];
 
 
+
 const GroupSignup = () => {
+
+//   const [joingroup, { error, data }] = useMutation(JOIN_GROUP);
+//   const handleChange = (event) => {
+//     const { join } = event.target;
+//   };
+// try {
+//   const { data } = await joingroup({
+//   });
+//   console.log(data);
+//   Auth.login(data.joingroup.token);
+
+// }},
     const theme = useMantineTheme();
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
     const features = data.map((feature, index) => (
@@ -73,7 +88,7 @@ const GroupSignup = () => {
             {feature.description}
           </Text>
           <Link to={`/dashboard`}>
-            <Button fullWidth className={classes.button}>
+            <Button  onChange={handleChange} fullWidth className={classes.button}>
               <div className={classes.label}>Join</div>
             </Button>
             </Link>

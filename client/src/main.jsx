@@ -23,7 +23,6 @@ import Communication from './pages/Communication/Communication.jsx';
 import Following from './pages/Following/Following.jsx';
 import GroupSignup from './pages/GroupSignup/GroupSignup.jsx';
 import AppLayout from './components/Layout/Layout.jsx';
-import { NavbarSimple } from './components/Layout/NavbarSimple.jsx';
 import auth from './utils/auth.js';
 
 const router = createBrowserRouter([
@@ -47,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LogIn />
+      },
+      {
+        path: '/group-signup',
+        element: <GroupSignup />
       },
       {
         path: '/logout',
@@ -120,18 +123,7 @@ const router = createBrowserRouter([
             path: '/following/:id',
             element: <Following />
           },
-          {
-            path: '/group-signup',
-            element: <GroupSignup />
-          },
-          {
-            path: '/layout',
-            element: <AppLayout/>
-          },
-          {
-            path: '/navbar',
-            element: <NavbarSimple/>
-          },
+          
         ]
       }
     ]
