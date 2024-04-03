@@ -14,11 +14,12 @@ import Auth from '../../utils/auth';
 
 import { useState, useEffect } from 'react';
 import classes from './LogIn.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export function LogIn() {
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate()
 
   const handleChange = async (event) => {
     const { name, value } = event.target;
@@ -50,7 +51,7 @@ export function LogIn() {
 
 
       Auth.login(data.login.token);
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
     } catch (e) {
       console.error('Login failed:', e);
     }
