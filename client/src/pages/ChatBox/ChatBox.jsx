@@ -9,6 +9,10 @@ import {
 import { db } from "../../utils/firebase";
 import Message from "./Message";
 import SendMessage from "./SendMessage";
+import {
+  Badge,
+  Group,
+} from '@mantine/core';
 
 const ChatBox = () => {
   const [messages, setMessages] = useState([]);
@@ -37,6 +41,12 @@ const ChatBox = () => {
   return (
    
   <main>
+     <Group justify="center">
+            <Badge variant="filled" size="xl">
+              Chatbox
+            </Badge>
+          </Group>
+          
       <div className="messages-wrapper">
         {messages?.map((message) => (
           <Message key={message.id} message={message} />

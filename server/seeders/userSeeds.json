@@ -7,7 +7,8 @@
     "password": "password123",
     "country": "United States",
     "skillsOffering": ["SQL", "Verbal Communication"],
-    "skillsInterestedIn": ["Tax", "Financial Planning"]
+    "skillsInterestedIn": ["Tax", "Financial Planning"],
+    "groups":"660ce24acf68fcb29c37eae5"
   },
 
   {

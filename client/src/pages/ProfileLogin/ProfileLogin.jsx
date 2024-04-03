@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Title,
+  Badge,
   Text,
   Card,
   Center,
@@ -34,6 +34,7 @@ const ProfileLogin = () => {
       country: me.country || '',
     },
   ];
+ console.log(userdata)
 
   const skillsData = [
     {
@@ -47,6 +48,8 @@ const ProfileLogin = () => {
       icon: IconWorldStar,
     }
   ];
+
+  console.log(skillsData)
 
   const features = skillsData.map((feature, index) => (
     <Card key={index} shadow="md" radius="md" className={classes.card} padding="xl">
@@ -95,9 +98,11 @@ const ProfileLogin = () => {
 
   return (
     <Container size="lg" py="xl">
-      <Title order={2} className={classes.title} ta="center" mt="sm">
-        Profile
-      </Title>
+      <Group justify="center">
+            <Badge variant="filled" size="xl">
+              Profile
+            </Badge>
+          </Group>
       <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing="sm">
           <Table.Thead>

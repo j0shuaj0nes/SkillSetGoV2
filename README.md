@@ -29,4 +29,5 @@ Simply create a profile showcasing your talents, browse through a diverse range 
 6. JavaScript Mastery. (2020, June 14). Build a Chat Application using React Hooks in 100 Lines of Code. 
 7. Full Mantine course, https://www.youtube.com/watch?v=57vs7TLth74
 8. "How to use the isLoggedIn prop in React.js", https://www.educative.io/answers/how-to-use-the-isloggedin-prop-in-reactjs
+8. GraphQL Tutorial #26 - Making Queries from React, https://www.youtube.com/watch?v=uyrUI1tgayk
 

@@ -42,14 +42,14 @@ const Header = () => {
                   {/* Run the getProfile() method to get access to the unencrypted token value in order to retrieve the user's username  */}
                   {Auth.getProfile().authenticatedPerson.username}'s profile
                 </Link>
-                <Button
+                {/* <Button
                   variant="outline"
                   color="gray"
                   className="btn-lg m-2"
                   onClick={logout}
                 >
                   Logout
-                </Button>
+                </Button> */}
               </>
             ) : (
               <>

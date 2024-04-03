@@ -1,4 +1,4 @@
-import { Avatar, Table, Group, Text, ActionIcon, Anchor, rem, Container, Title, Grid, Center } from '@mantine/core';
+import { Avatar, Table, Group, Text, ActionIcon, Badge, rem, Container, Title, Grid, Center } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { useQuery, useMutation } from '@apollo/client'; 
 import classes from "./UserFollowing.module.css"
@@ -55,11 +55,11 @@ export function UserFollowing() {
 
   return (
     <Container size="xxl" py="xs">
-      <Center>
-        <Title order={2} className={classes.title} ta="center" mt="sm">
-          Following
-        </Title>
-      </Center>
+      <Group justify="center">
+      <Badge variant="filled" size="xl">
+              Following
+            </Badge>
+          </Group>
       <Grid>
         <Grid.Col span={4}></Grid.Col>
         <Grid.Col span={7}>

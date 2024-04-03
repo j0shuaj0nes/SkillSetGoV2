@@ -83,7 +83,7 @@ const GroupPage = () => {
         <Container size="lg" py="xl">
           <Group justify="center">
             <Badge variant="filled" size="xl">
-              SkillSetGo
+              Connect
             </Badge>
           </Group>
     

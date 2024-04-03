@@ -204,6 +204,13 @@ export function Signup() {
                 Log In
               </Anchor>
             </Text>
+            <Text ta="center" mt="md">
+          Having issues? {" "}
+          <Anchor component={Link} to="/contact-us" fw={700}>
+            Contact us
+          </Anchor>
+        </Text>
+
           </Paper>
         </form>
       

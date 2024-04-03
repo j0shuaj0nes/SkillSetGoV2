@@ -1,7 +1,7 @@
 import Header from "../../components/Header";
 import { NavbarSimple } from "../../components/Layout/NavbarSimple";
 import { useDisclosure } from "@mantine/hooks";
-import { AppShell, Burger, Group } from "@mantine/core";
+import { AppShell, Burger, Group, Center } from "@mantine/core";
 import { Outlet, useNavigate } from "react-router-dom";
 import auth from "../../utils/auth";
 
@@ -13,21 +13,9 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
   const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
   console.log('Welcome -> loggedIn', loggedIn);
 
-  // const navigate = useNavigate();
-
-
-  
-  /// try to check if user is authenticated
-  // if(!isLoggedIn){
-  //   return navigate('/login');
-  // }
-  
-
-  // <suspense> ??
 
   return (
     
-  
     <AppShell
       header={{ height: 60 }}
       navbar={{
@@ -38,7 +26,7 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
       }}
       padding="md"
     >
-      {/* <Center inline> */}
+      <Center inline>
       <AppShell.Header bg="var(--mantine-color-blue-light)">
         <Header />
         <Group h="100%" px="md">
@@ -56,9 +44,9 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
           />
         </Group>
       </AppShell.Header>
-      {/* </Center> */}
+      </Center>
 
-      <AppShell.Navbar p="sm" zIndex={5}>
+      <AppShell.Navbar p="sm" zIndex={3}>
         <NavbarSimple />
       </AppShell.Navbar>
 
@@ -66,6 +54,7 @@ export default function AppLayout({loggedIn, setLoggedIn}) {
         {/* Main content goes here */}
         <Outlet/>
       </AppShell.Main>
+
     </AppShell>
     
   );
