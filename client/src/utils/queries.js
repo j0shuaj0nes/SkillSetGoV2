@@ -48,20 +48,10 @@ export const QUERY_ME = gql`
       country
       skillsOffering
       skillsInterestedIn
+      email
       groups {
         _id
         name
-      }
-      followers {
-        _id
-        username
-        givenName
-        familyName
-        email
-        groups {
-          _id
-          name
-        }
       }
     }
   }

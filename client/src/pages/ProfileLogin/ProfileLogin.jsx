@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import {
-  Title,
+  Badge,
   Text,
   Card,
   Center,
@@ -10,114 +11,164 @@ import {
   Group,
   ActionIcon,
   useMantineTheme,
+  TextInput,
 } from '@mantine/core';
-import { IconSwords, IconWorldStar, IconPencil } from '@tabler/icons-react';
+import { IconSwords, IconWorldStar, IconPencil, IconCheck, IconX } from '@tabler/icons-react';
 import classes from './Profile.module.css';
-import { Navigate, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { QUERY_USER, QUERY_ME } from '../../utils/queries.js';
-import Auth from '../../utils/auth.js';
+import { useQuery, useMutation } from '@apollo/client';
+import { QUERY_ME } from '../../utils/queries.js';
+import { UPDATE_USER } from '../../utils/mutations.js';
 
 const ProfileLogin = () => {
   const theme = useMantineTheme();
-  const { username: userParam } = useParams();
-  const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
-    variables: { username: userParam },
+  const { loading, error, data, refetch } = useQuery(QUERY_ME);
+  const { me } = data || {};
+
+  const [editIndex, setEditIndex] = useState(null); // Store the index of the row being edited
+  const [editedValues, setEditedValues] = useState({}); // Store edited values temporarily
+
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onError: (error) => {
+      console.error('Mutation error:', error);
+    },
   });
 
-  const user = data?.me || data?.user || {};
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
-  // if (Auth.loggedIn() && Auth.getProfile().authenticatedPerson.username === userParam) {
-  //   return <Navigate to="/dashboard" />;
-  // }
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditedValues({
+      username: me.username || '',
+      givenName: me.givenName || '',
+      familyName: me.familyName || '',
+      email: me.email || '',
+      country: me.country || '',
+    });
+  };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  // if (!user?.username) {
-  //   return (
-  //     <h4>
-  //       You need to be logged in to see this. Use the navigation links above to
-  //       sign up or log in!
-  //     </h4>
-  //   );
-  // }
-
-  const userdata = [
-    {
-      username: userParam ? user.username : '',
-      givenName: userParam ? user.givenName : '',
-      familyName: userParam ? user.familyName : '',
-      email: userParam ? user.email : '',
-      country: userParam ? user.country : '',
-    },
-  ];
-
-  const skillsData = [
-    {
-      title: 'Skills Offering',
-      description: userParam ? user.skillsOffering: '',
-      icon: IconSwords,
-    },
-    {
-      title: 'Skills interested in acquiring',
-      description: userParam ? user.sillsInterestedIn : '',
-      icon: IconWorldStar,
+  const handleSave = async () => {
+    try {
+      await updateUser({
+        variables: {
+          username: editedValues.username,
+          givenName: editedValues.givenName,
+          familyName: editedValues.familyName,
+          email: editedValues.email,
+          country: editedValues.country,
+        },
+      });
+      await refetch();
+      setEditIndex(null); // Exit edit mode
+    } catch (error) {
+      console.error('Error updating user:', error);
     }
-  ];
+  };
 
-  const features = skillsData.map((feature, index) => (
-    <Card key={index} shadow="md" radius="md" className={classes.card} padding="xl">
-      <feature.icon
-        style={{ width: rem(50), height: rem(50) }}
-        stroke={2}
-        color={theme.colors.blue[6]}
-      />
-      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
-        {feature.title}
-      </Text>
-      <Text fz="sm" c="dimmed" mt="sm">
-        {feature.description}
-      </Text>
-    </Card>
-  ));
+  const handleCancel = () => {
+    setEditIndex(null); // Exit edit mode
+  };
 
-  const rows = userdata.map((item, index) => (
-    <Table.Tr key={index}>
-      <Table.Td>
-        <Text fz="sm" fw={500}>
-          {item.username}
-        </Text>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.givenName}</Text>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.familyName}</Text>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.email}</Text>
-      </Table.Td>
-      <Table.Td>
-        <Text fz="sm">{item.country}</Text>
-      </Table.Td>
-      <Table.Td>
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setEditedValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
 
+  const rows = me ? (
+    <Table.Tr>
+      <Table.Td>
+        {editIndex !== 0 ? (
+          <Text fz="sm" fw={500}>
+            {me.username}
+          </Text>
+        ) : (
+          <TextInput
+            value={editedValues.username}
+            onChange={handleChange}
+            name="username"
+            size="xs"
+          />
+        )}
+      </Table.Td>
+      <Table.Td>
+        {editIndex !== 0 ? (
+          <Text fz="sm">{me.givenName}</Text>
+        ) : (
+          <TextInput
+            value={editedValues.givenName}
+            onChange={handleChange}
+            name="givenName"
+            size="xs"
+          />
+        )}
+      </Table.Td>
+      <Table.Td>
+        {editIndex !== 0 ? (
+          <Text fz="sm">{me.familyName}</Text>
+        ) : (
+          <TextInput
+            value={editedValues.familyName}
+            onChange={handleChange}
+            name="familyName"
+            size="xs"
+          />
+        )}
+      </Table.Td>
+      <Table.Td>
+        {editIndex !== 0 ? (
+          <Text fz="sm">{me.email}</Text>
+        ) : (
+          <TextInput
+            value={editedValues.email}
+            onChange={handleChange}
+            name="email"
+            size="xs"
+          />
+        )}
+      </Table.Td>
+      <Table.Td>
+        {editIndex !== 0 ? (
+          <Text fz="sm">{me.country}</Text>
+        ) : (
+          <TextInput
+            value={editedValues.country}
+            onChange={handleChange}
+            name="country"
+            size="xs"
+          />
+        )}
+      </Table.Td>
+      <Table.Td>
         <Group gap={0} justify="flex-end">
-            <ActionIcon variant="subtle" color="gray">
+          {editIndex !== 0 ? (
+            <ActionIcon variant="subtle" color="gray" onClick={() => handleEdit(0)}>
               <IconPencil style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
             </ActionIcon>
-          </Group>
+          ) : (
+            <>
+              <ActionIcon variant="subtle" color="green" onClick={handleSave}>
+                <IconCheck style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              </ActionIcon>
+              <ActionIcon variant="subtle" color="red" onClick={handleCancel}>
+                <IconX style={{ width: rem(16), height: rem(16) }} stroke={1.5} />
+              </ActionIcon>
+            </>
+          )}
+        </Group>
       </Table.Td>
     </Table.Tr>
-  ));
+  ) : null;
 
   return (
     <Container size="lg" py="xl">
-      <Title order={2} className={classes.title} ta="center" mt="sm">
-        Profile
-      </Title>
+      <Group justify="center">
+        <Badge variant="filled" size="xl">
+          Profile
+        </Badge>
+      </Group>
       <Table.ScrollContainer minWidth={800}>
         <Table verticalSpacing="sm">
           <Table.Thead>
@@ -135,7 +186,32 @@ const ProfileLogin = () => {
       </Table.ScrollContainer>
       <Center>
         <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
-          {features}
+          <Card key={1} shadow="md" radius="md" className={classes.card} padding="xl">
+            <IconSwords
+              style={{ width: rem(50), height: rem(50) }}
+              stroke={2}
+              color={theme.colors.blue[6]}
+            />
+            <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+              Skills Offering
+            </Text>
+            <Text fz="sm" c="dimmed" mt="sm">
+              {me ? me.skillsOffering : ''}
+            </Text>
+          </Card>
+          <Card key={2} shadow="md" radius="md" className={classes.card} padding="xl">
+            <IconWorldStar
+              style={{ width: rem(50), height: rem(50) }}
+              stroke={2}
+              color={theme.colors.blue[6]}
+            />
+            <Text fz="lg" fw={500} className={classes.cardTitle} mt="md">
+              Skills interested in acquiring
+            </Text>
+            <Text fz="sm" c="dimmed" mt="sm">
+              {me ? me.skillsInterestedIn : ''}
+            </Text>
+          </Card>
         </SimpleGrid>
       </Center>
     </Container>
