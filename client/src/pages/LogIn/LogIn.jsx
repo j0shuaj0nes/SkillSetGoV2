@@ -9,16 +9,16 @@ import {
   Center,
   Group,
   Anchor,
-} from "@mantine/core";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../../utils/mutations";
-import Auth from "../../utils/auth";
-// import { auth } from "../../utils/firebase.js";
-// import GoogleSignin from "../../assets/btn_google_signin_dark_pressed_web.png";
-// import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { useState, useEffect } from "react";
-import classes from "./LogIn.module.css";
-import { Link } from "react-router-dom";
+
+} from '@mantine/core';
+import { useMutation } from '@apollo/client';
+import { LOGIN_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
+
+import { useState, useEffect } from 'react';
+import classes from './LogIn.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 export function LogIn() {
   const googleSignIn = async () => {
@@ -28,6 +28,7 @@ export function LogIn() {
   };
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+  const navigate = useNavigate()
 
   const handleChange = async (event) => {
     const { name, value } = event.target;
@@ -57,7 +58,9 @@ export function LogIn() {
       console.log("Received token:", data.login.token);
 
       Auth.login(data.login.token);
-      window.location.href = "/dashboard";
+
+      navigate('/dashboard');
+
     } catch (e) {
       console.error("Login failed:", e);
     }
