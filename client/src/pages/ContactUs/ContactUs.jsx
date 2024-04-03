@@ -1,5 +1,5 @@
 import {
-  AppShell, 
+  Center, 
   Text,
   Title,
   SimpleGrid,
@@ -23,8 +23,8 @@ export function ContactUs() {
   ));
 
   return (
-   
-    <div className={classes.wrapper}>
+    <Center h="100vh" className={classes.wrapper}>
+    <div>
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing={50}>
         <div>
           <Title className={classes.title}>Contact us</Title>
@@ -64,6 +64,6 @@ export function ContactUs() {
         </div>
       </SimpleGrid>
     </div>
-   
+    </Center>
   );
 }

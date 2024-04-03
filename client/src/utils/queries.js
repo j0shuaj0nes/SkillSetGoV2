@@ -42,6 +42,12 @@ export const QUERY_ME = gql`
     me {
       _id
       username
+      givenName
+      familyName
+      email
+      country
+      skillsOffering
+      skillsInterestedIn
       email
       groups {
         _id

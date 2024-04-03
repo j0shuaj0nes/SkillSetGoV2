@@ -1,5 +1,5 @@
 import cx from 'clsx';
-import { Title, Text, Container, Button, Overlay, Center, Anchor } from '@mantine/core';
+import { Title, Text, Container, Button, Overlay, Center, Anchor, Grid } from '@mantine/core';
 import classes from './LandingPage.module.css';
 import { Link } from 'react-router-dom'
 
@@ -23,18 +23,24 @@ export function LandingPage() {
           </Text>
         </Container>
 
-        <div className={classes.controls}>
+        <Center>
+        <Grid className={classes.controls}>
+        <Grid.Col span={6}>
           <Anchor component={Link} to="/login" fw={700} >
             <Button className={classes.control} variant="white" size="lg">
               Log In
             </Button>
           </Anchor>
+          </Grid.Col>
+          <Grid.Col span={6}>
           <Anchor component={Link} to="/signup" fw={700} >
             <Button className={cx(classes.control, classes.secondaryControl)} size="lg">
               Sign Up
             </Button>
-          </Anchor>
-        </div>
+            </Anchor>
+            </Grid.Col>
+          </Grid>
+          </Center>
       </div>
     </Center>
   );

@@ -1,11 +1,14 @@
-
-import React from 'react';
-import { Container, Card, Text, Button } from '@mantine/core';
-
+import React from "react";
+import { Container, Card, Text, Button } from "@mantine/core";
 
 const coders = [
-  { id: 1, name: 'John DoeCoder', country: 'USA', skills: 'React, Node.js' },
-  { id: 2, name: 'Jane Smith', country: 'Canada', skills: 'HTML, CSS, JavaScript' },
+  { id: 1, name: "John DoeCoder", country: "USA", skills: "React, Node.js" },
+  {
+    id: 2,
+    name: "Jane Smith",
+    country: "Canada",
+    skills: "HTML, CSS, JavaScript",
+  },
 ];
 
 const Coding = () => {
@@ -16,24 +19,24 @@ const Coding = () => {
 
   return (
     <Container>
-          <h1>Coding</h1>
-          {coders.map((user) => (
-              <Card key={user.id} shadow="sm" style={{ marginBottom: 20 }}>
-                  <Text weight={600} size="lg" style={{ marginBottom: 10 }}>
-                      {user.name}
-                  </Text>
-                  <Text size="sm" color="gray" style={{ marginBottom: 10 }}>
-                      {user.country}
-                  </Text>
-                  <Text size="sm" style={{ marginBottom: 20 }}>
-                      Skills: {user.skills}
-                  </Text>
-                  <Button color="blue" onClick={() => handleFollow(user.id)}>
-                      Follow
-                  </Button>
-              </Card>
-          ))}
-      </Container>
+      <h1>Coding</h1>
+      {coders.map((user) => (
+        <Card key={user.id} shadow="sm" style={{ marginBottom: 20 }}>
+          <Text weight={600} size="lg" style={{ marginBottom: 10 }}>
+            {user.name}
+          </Text>
+          <Text size="sm" color="gray" style={{ marginBottom: 10 }}>
+            {user.country}
+          </Text>
+          <Text size="sm" style={{ marginBottom: 20 }}>
+            Skills: {user.skills}
+          </Text>
+          <Button color="blue" onClick={() => handleFollow(user.id)}>
+            Follow
+          </Button>
+        </Card>
+      ))}
+    </Container>
   );
 };
 
