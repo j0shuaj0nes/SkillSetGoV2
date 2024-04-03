@@ -15,7 +15,9 @@ import {
   } from '@mantine/core';
   import { IconCode, IconGavel, IconCash, IconMessage2Share, IconCategory2, IconChartPie } from '@tabler/icons-react';
   import { Link } from 'react-router-dom';
-  
+  import { useMutation } from "@apollo/client";
+import { JOIN_GROUP } from "../../utils/mutations";
+
 
 const data = [
   {
@@ -55,8 +57,22 @@ const data = [
   },
 ];
 
-
 const GroupSignup = () => {
+  // const [joinGroup, { error, data }] = useMutation(JOIN_GROUP);
+
+  // const handleSignup = async () => {
+  //   try {
+  //     const response = await joinGroup({
+  //       variables: { groupId } // Pass group ID to the mutation
+  //     });
+  //     console.log(response.data);
+      
+      
+  //   } catch (error) {
+  //     console.error('Error occurred during group signup:', error);
+  //   }
+  // };
+
     const theme = useMantineTheme();
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
     const features = data.map((feature, index) => (

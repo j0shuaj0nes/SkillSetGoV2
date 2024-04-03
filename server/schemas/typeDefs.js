@@ -31,18 +31,12 @@ const typeDefs = `
   }
 
   type Query {
-  me(
-    username: String
-    givenName: String,
-    familyName: String,
-    email: String,
-    country: String,
-    skillsOffering: [String],
-    skillsInterestedIn: [String],
-    groups: [Group],
-    followers: [Followers]
-
-  ): Auth
+    me: User
+    users: [User]
+    user(username: String!): User
+    groups: [Group]
+    group(name: String!): Group
+  }
 
 
   type Mutation {
