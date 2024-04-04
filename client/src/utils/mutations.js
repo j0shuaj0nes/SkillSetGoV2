@@ -13,8 +13,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $givenName: String!, $familyName: String!, $email: String!, $password: String!, $country: String!, $skillsOffering: [String!], $skillsInterestedIn: [String!]) {
-    addUser(username: $username, givenName: $givenName, familyName: $familyName, email: $email, password: $password, country:$country, skillsOffering:$skillsOffering, skillsInterestedIn:$skillsInterestedIn) {
+  mutation addUser($username: String!, $email: String!, $password: String!) {
+    addUser(username: $username, email: $email, password: $password) {
       token
       user {
         _id
@@ -44,19 +44,24 @@ export const DELETE_USER_MUTATION = gql`
 `;
 
 
-
 export const JOIN_GROUP = gql`
-  mutation JoinGroup($userId: ID!, $groupId: ID!) {
-    joinGroup(userId: $userId, groupId: $groupId) {
+  mutation JoinGroup($userId: ID!, $groupName: String!) {
+    joinGroupByName(userId: $userId, groupName: $groupName) {
       _id
       name
-      members {
-        _id
-        username
-      }
+      
     }
   }
 `;
+
+// export const JOIN_GROUP = gql`
+//   mutation JoinGroup($userId: ID!, $groupId: ID!) {
+//     joinGroup(userId: $userId, groupId: $groupId) {
+//       _id
+//       name
+//     }
+//   }
+// `;
 
 export const LEAVE_GROUP = gql`
   mutation LeaveGroup($userId: ID!, $groupId: ID!) {

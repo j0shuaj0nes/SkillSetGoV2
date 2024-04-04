@@ -16,8 +16,8 @@ const Investing = () => {
   };
 
   return (
-    <><Container>
-          <h1>Coding</h1>
+    <Container>
+          <h1>Investing</h1>
           {investors.map((user) => (
               <Card key={user.id} shadow="sm" style={{ marginBottom: 20 }}>
                   <Text weight={600} size="lg" style={{ marginBottom: 10 }}>
@@ -35,25 +35,7 @@ const Investing = () => {
               </Card>
           ))}
       </Container>
-      <Container>
-              <h1>Investing</h1>
-              {investors.map((user) => (
-                  <Card key={user.id} shadow="sm" style={{ marginBottom: 20 }}>
-                      <Text weight={600} size="lg" style={{ marginBottom: 10 }}>
-                          {user.name}
-                      </Text>
-                      <Text size="sm" color="gray" style={{ marginBottom: 10 }}>
-                          {user.country}
-                      </Text>
-                      <Text size="sm" style={{ marginBottom: 20 }}>
-                          Skills: {user.skills}
-                      </Text>
-                      <Button color="blue" onClick={() => handleFollow(user.id)}>
-                          Follow
-                      </Button>
-                  </Card>
-              ))}
-          </Container></>
+   
   );
 };
 

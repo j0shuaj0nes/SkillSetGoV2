@@ -13,7 +13,9 @@ export const QUERY_USER = gql`
       skillsInterestedIn
       groups {
         _id
-        name
+      }
+      followers {
+        _id
       }
     }
   }
@@ -30,7 +32,7 @@ export const QUERY_GROUPS = gql`
 
 export const QUERY_SINGLE_GROUP = gql`
   query getSingleGroup($groupid: ID!) {
-    thought(groupid: $groupid) {
+    group (groupid: $groupid) {
       _id
       name
     }

@@ -47,6 +47,9 @@ export function GroupsJoined() {
   //   </Table.Tr>
   // ));
 
+
+
+
   return (
     <Container size="lg" py="xl">
       <Group justify="center">
@@ -60,11 +63,20 @@ export function GroupsJoined() {
           <Table.Thead>
             <Table.Tr>
               <Table.Th>Group</Table.Th>
-              <Table.Th>Action</Table.Th>
+              
               <Table.Th />
             </Table.Tr>
           </Table.Thead>
-          <Table.Tbody>{me.groups}</Table.Tbody>
+          <Table.Tbody>
+
+            {me.groups.map(group => (
+              <Table.Tr>
+                <Table.Td>{group.name}</Table.Td>
+              </Table.Tr>
+
+            ))}
+            
+            </Table.Tbody>
         </Table>
       </Table.ScrollContainer>
     </Container>
