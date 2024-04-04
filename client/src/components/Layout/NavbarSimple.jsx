@@ -15,7 +15,7 @@ import classes from "./NavbarSimple.module.css";
 import Auth from "../../utils/auth";
 
 const data = [
-  { href: "/", label: "", icon: IconHome},
+  { href: "", label: "", icon: IconHome },
   { href: "/profile-login", label: "Profile", icon: IconUserCircle },
   { href: "/groups-joined", label: "Groups", icon: IconUsersGroup },
   { href: "/user-following", label: "Following", icon: IconFriends },
@@ -31,11 +31,12 @@ export function NavbarSimple() {
     event.preventDefault();
     Auth.logout();
   };
-  console.log(logout)
+  console.log(logout);
 
   const items = data.map((item, index) => (
     <NavLink
-      component={Link} to={item.href}
+      component={Link}
+      to={item.href}
       key={item.label}
       active={index === active}
       label={item.label}
@@ -44,28 +45,29 @@ export function NavbarSimple() {
       leftSection={<item.icon size="1rem" stroke={1.5} />}
       onClick={() => setActive(index)}
     />
-   
   ));
 
   return (
     <Box w={200}>
-      <Burger
+      {/* <Burger
         opened={opened}
         onClick={toggle}
         size="sm"
         aria-label="Toggle navigation"
-      />
+      /> */}
       {items}
 
       <div className="logout">
-      <Anchor className={classes.link} onClick={logout} component={Link} to="/logout">
+        <Anchor
+          className={classes.link}
+          onClick={logout}
+          component={Link}
+          to="/logout"
+        >
           <IconLogout className={classes.linkIcon} size="1rem" stroke={1.5} />
           <span>Logout</span>
-          </Anchor>
-
-
+        </Anchor>
       </div>
-
     </Box>
   );
 }
