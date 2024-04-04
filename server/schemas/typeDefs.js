@@ -24,13 +24,6 @@ const typeDefs = `
   }
 
   type Query {
-    users: [User]
-    user(username: String!): User
-    groups: [Group]
-    group(name: String!): Group
-  }
-
-  type Query {
     me: User
     users: [User]
     user(username: String!): User
@@ -38,33 +31,20 @@ const typeDefs = `
     group(name: String!): Group
   }
 
-
   type Mutation {
-    addUser(
-      username: String
-      givenName: String,
-      familyName: String,
-      email: String,
-      password: String,
-      country: String,
-      skillsOffering: [String],
-      skillsInterestedIn: [String]
-    ): Auth
-    
-
-    updateUser(
-        _id: ID!, 
-        username: String, 
-        email: String, country: String, skillsOffering: [String], skillsInterestedIn: [String]): User 
-        deleteUser(_id: ID!): Boolean
-        login(email: String!, password: String!): Auth
-        addGroup(name: String!): User
-        removeGroup(name: String!): User
-        joinGroup(userId: ID!, groupId: ID!): Group
-        leaveGroup(userId: ID!, groupId: ID!): Group
-        addFollower(_id: ID!): User
-        deleteFollower(_id: ID!): User
-    }
+    addUser(username: String!, email: String!, password: String!): Auth
+    updateUser(username: String, email: String, country: String, skillsOffering: String, skillsInterestedIn: String): User 
+    deleteUser(_id: ID!): Boolean
+    login(email: String!, password: String!): Auth
+    joinGroup(userId: ID!, groupId: ID!): Group
+    joinGroupByName(userId: ID!, groupName: String!): Group
+    leaveGroup(userId: ID!, groupId: ID!): Group
+    addFollower(_id: ID!): User
+    deleteFollower(_id: ID!): User
+  }
 `;
 
 module.exports = typeDefs;
+
+// ?export default typeDefs;
+

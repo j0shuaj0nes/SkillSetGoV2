@@ -15,11 +15,14 @@ import {
   } from '@mantine/core';
   import { IconCode, IconGavel, IconCash, IconMessage2Share, IconCategory2, IconChartPie } from '@tabler/icons-react';
   import { Link } from 'react-router-dom';
-  import { useMutation } from "@apollo/client";
-import { JOIN_GROUP } from "../../utils/mutations";
+  import { useMutation } from '@apollo/client';
+  import { JOIN_GROUP } from '../../utils/mutations';
+import auth from '../../utils/auth';
+  
 
-
-const data = [
+  // ??? 
+  // 
+const datalist = [
   {
     title: 'Coding',
     description:
@@ -57,25 +60,35 @@ const data = [
   },
 ];
 
-const GroupSignup = () => {
-  // const [joinGroup, { error, data }] = useMutation(JOIN_GROUP);
 
-  // const handleSignup = async () => {
-  //   try {
-  //     const response = await joinGroup({
-  //       variables: { groupId } // Pass group ID to the mutation
-  //     });
-  //     console.log(response.data);
-      
-      
-  //   } catch (error) {
-  //     console.error('Error occurred during group signup:', error);
-  //   }
-  // };
-
+const GroupSignup = (props) => {
     const theme = useMantineTheme();
     const categories = ['coding', 'communication', 'investing', 'finance', 'entrepreneurship', 'business-law']
-    const features = data.map((feature, index) => (
+    const categoryIDs = ['65ff5be14a87246c1e0cae86', '65ff5be14a87246c1e0cae87', '65ff5be14a87246c1e0cae89', '65ff5be14a87246c1e0cae88']
+    
+    // const { userId, groupId } = props;
+
+    // TODO: get userID from Auth
+    const userId = auth.getProfile().authenticatedPerson._id; // ??
+
+
+    console.log('profile', auth.getProfile());
+
+
+
+    const [joinGroup, { loading, error,}] = useMutation(JOIN_GROUP);
+    const handleJoinGroup = (groupName) => {
+      joinGroup({
+        variables: { userId, groupName },
+      }).catch((error) => {
+        console.error('Error joining group:', error);
+      });
+    };
+    
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error.message}</p>;
+
+    const features = datalist.map((feature, index) => (
         <Card key={feature.title} shadow="md" radius="md" padding="xl">
           <feature.icon
             style={{ width: rem(50), height: rem(50) }}
@@ -88,19 +101,27 @@ const GroupSignup = () => {
           <Text fz="sm" c="dimmed" mt="sm">
             {feature.description}
           </Text>
-          <Link to={`/dashboard`}>
+          <p></p>
+          {/* <Link to={`/groups/${categories[index]}`}>
             <Button fullWidth className={classes.button}>
-              <div className={classes.label}>Join</div>
+              <div className={classes.label}>Meet Experts</div>
             </Button>
-            </Link>
-          
+          </Link> */}
+          <p></p>
+          <Link to={`/dashboard`}>
+          <Button
+            fullWidth className={classes.button}
+            onClick={() => handleJoinGroup(feature.title)}>
+              <div className={classes.label}>Join Group</div>
+          </Button>
+          </Link>
         </Card>
       ));
       return (
         <Container size="lg" py="xl">
           <Group justify="center">
             <Badge variant="filled" size="xl">
-              SkillSetGo
+              Connect
             </Badge>
           </Group>
     
@@ -120,3 +141,4 @@ const GroupSignup = () => {
 };
 
 export default GroupSignup;
+

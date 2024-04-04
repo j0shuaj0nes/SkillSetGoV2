@@ -1,5 +1,6 @@
 const { User, Group } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const {Types} = require('mongoose')
 
 const resolvers = {
   Query: {
@@ -14,7 +15,7 @@ const resolvers = {
       return Group.find(params).sort({ createdAt: -1 });
     },
     group: async (parent, { name }) => {
-      return Group.findOne({ name: name });
+      return Group.findOne({ Name: Name });
     },
     me: async (parent, args, context) => {
       if (!context.user) {
@@ -26,12 +27,12 @@ const resolvers = {
       } catch (error) {
         throw new Error('Error fetching user data');
       }
-    }
-  },
+    },
 
+  },
   Mutation: {
-    addUser: async (parent, { username, email, password, givenName, familyName, country, skillsOffering, skillsInterestedIn }) => {
-      const user = await User.create({ username, email, password, givenName, familyName, country, skillsOffering, skillsInterestedIn });
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
@@ -52,7 +53,7 @@ const resolvers = {
 
       return { token, user };
     },
-    updateUser: async (_, { _id, username, email, country, skillsOffering, skillsInterestedIn }, context) => {
+    updateUser: async (_, { username, email, country, skillsOffering, skillsInterestedIn }, context) => {
       if (context.user) {
         const updateFields = {};
         if (username) updateFields.username = username;
@@ -90,10 +91,52 @@ const resolvers = {
         return false;
       }
     },
+    async joinGroupByName(_, {userId, groupName}){
+
+      let group;
+      // get group by name
+      group = await Group.findOne({
+        name: groupName
+      });
+      
+      // if not found, create group
+      if(!group){
+        group = new Group({
+          name: groupName
+        })
+        group = await group.save();
+      }
+      console.log('created', group)
+
+      // find user.
+      const user = await User.findById(userId);
+
+      // if user not found then throw id 
+      if(!user){
+        throw new Error('Invalid user');
+      }
+
+      // attach user id to group
+      group = await Group.findByIdAndUpdate(group._id, {
+        $push: {
+          members: new Types.ObjectId(user._id),
+        }
+      }, {new: true});
+
+      await user.updateOne({
+        $push: {
+          groups: group._id
+        }
+      })
+      console.log('updated', group);
+
+      return group;
+
+    },
     joinGroup: async (_, { userId, groupId }) => {
       try {
         const group = await Group.findByIdAndUpdate(
-          {_id:context.user._id},
+          {_id:groupId},
           { $addToSet: { members: userId } },
           { new: true }
         );
@@ -101,17 +144,17 @@ const resolvers = {
         if (!group) {
           throw new Error('Group not found!');
         }
-
-        const addGrouptoUser = await User.findByIdAndUpdate(
-          {_id:userId},
-          { $addToSet: { groups: groupId } },
-          { new: true }
-        )
-        if (!addGrouptoUser) {
-          throw new Error('User not found!');
-        }
-
-        return group;
+        
+      const addGrouptoUser = await User.findByIdAndUpdate(
+        {_id:userId},
+        { $addToSet: { groups: groupId } },
+        { new: true }
+      )
+      if (!addGrouptoUser) {
+        throw new Error('User not found!');
+      }
+       
+      return group;
       } catch (error) {
         throw new Error(error.message);
       }
@@ -129,14 +172,15 @@ const resolvers = {
         if (!group) {
           throw new Error('Group not found!');
         }
-        const RemoveGroupfromUser = await User.findByIdAndUpdate(
-          {_id:userId},
-          { $pull: { groups: groupId } },
-          { new: true }
-        )
-        if (!RemoveGroupfromUser) {
-          throw new Error('User not found!');
-        }
+
+      const RemoveGroupfromUser = await User.findByIdAndUpdate(
+        {_id:userId},
+        { $pull: { groups: groupId } },
+        { new: true }
+      )
+      if (!RemoveGroupfromUser) {
+        throw new Error('User not found!');
+      }
         return group;
       } catch (error) {
         throw new Error(error.message);
@@ -176,31 +220,14 @@ const resolvers = {
             runValidators: true,
           }
         );
-    
+  
         return user;
       }
     
       throw new AuthenticationError('Unauthorized');
     },
   },
-};
-
-   // addFollower: async (_, { userId }) => {
-    //   try {
-    //     const group = await User.findByIdAndUpdate(
-    //       {_id:userId},
-    //       { $addToSet: { followers: userId } },
-    //       { new: true, runValidators: true }
-    //     );
-
-    //     if (!user) {
-    //       throw new Error('User not found!');
-    //     }
-    //     return user;
-    //   } catch (error) {
-    //     throw new Error(error.message);
-    //   }
-    // },
+}
 
 module.exports = resolvers;
 
@@ -244,3 +271,21 @@ module.exports = resolvers;
   //   }
   //   throw AuthenticationError;
   // },
+
+
+   // addFollower: async (_, { userId }) => {
+    //   try {
+    //     const group = await User.findByIdAndUpdate(
+    //       {_id:userId},
+    //       { $addToSet: { followers: userId } },
+    //       { new: true, runValidators: true }
+    //     );
+
+    //     if (!user) {
+    //       throw new Error('User not found!');
+    //     }
+    //     return user;
+    //   } catch (error) {
+    //     throw new Error(error.message);
+    //   }
+    // },
