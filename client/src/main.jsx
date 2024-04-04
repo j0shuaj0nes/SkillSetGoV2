@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import { ContactUs } from './pages/ContactUs/ContactUs.jsx';
 import { LandingPage } from './pages/LandingPage/LandingPage.jsx';
-import { LogIn } from './pages/LogIn/LogIn.jsx';
+import { LogIn } from './pages/LogIn/Login.jsx';
 import Chatbox from './pages/ChatBox/ChatBox.jsx';
 import { Signup } from './pages/Signup/Signup.jsx';
 import { LogOut } from './pages/Logout/Logout.jsx';
@@ -24,6 +24,7 @@ import Following from './pages/Following/Following.jsx';
 import GroupSignup from './pages/GroupSignup/GroupSignup.jsx';
 import AppLayout from './components/Layout/Layout.jsx';
 import auth from './utils/auth.js';
+
 
 const router = createBrowserRouter([
   {

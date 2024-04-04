@@ -67,7 +67,6 @@ export function Signup() {
       Auth.login(data.addUser.token);
 
       // Redirect to dashboard after successful signup
-      // history.push("/dashboard");
       navigate('/group-signup');
     } catch (e) {
       console.error('Login failed:', e);
@@ -190,14 +189,9 @@ export function Signup() {
               ]}
             />
             <Checkbox label="Keep me logged in" mt="xl" size="md" />
-            {/* <Anchor component={Link} to="/dashboard"> */}
               <Button fullWidth mt="xl" size="md" type="submit">
-
                 Register
-
               </Button>
-            {/* </Anchor> */}
-
             <Text ta="center" mt="md">
               Already have an account?{" "}
               <Anchor component={Link} to="/login" fw={700}>
